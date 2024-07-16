@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 
-setup(name='pyPLUTO',
+setup(name='SRPy',
       version='4.4.2',
       description="Python Visualisation module for PLUTO v4.4. Upgraded to Python 3.x including particle files reader",
       author="Bhargav Vaidya",

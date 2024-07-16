@@ -1,7 +1,7 @@
 Installation
 ============
 
-The current version of PySR has been updated to support Python version 3 and is tested with > 3.6.
+The current version of SRPy has been updated to support Python version 3 and is tested with > 3.6.
 
 Global Install
 --------------
