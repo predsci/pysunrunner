@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyPLUTO.ploadparticles &mdash; PySR 4.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=bca0d8b2"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PySR
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guide.html">Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PySR</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pyPLUTO.ploadparticles</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pyPLUTO.ploadparticles</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="ploadparticles">
+<a class="viewcode-back" href="../../modules/ploadparticles.html#pyPLUTO.ploadparticles.ploadparticles">[docs]</a>
+<span class="k">class</span> <span class="nc">ploadparticles</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">w_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ptype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">chnum</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">		</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Loads the Particle datafile.</span>
+
+<span class="sd">		**Inputs**:</span>
+<span class="sd">		ns 	-- Step Number of the data file\n</span>
+<span class="sd">		w_dir 	 -- path to the directory which has the data files\n</span>
+<span class="sd">		datatype -- Datatype (default is set to read .dbl data files)</span>
+<span class="sd">		ptype 	 -- A string denoting the type of particles (&#39;LP&#39;, &#39;CR&#39;, &#39;DUST&#39; etc. Default is &#39;CR&#39;)</span>
+<span class="sd">		chnum    -- 2 digit integer denoting chunk number</span>
+<span class="sd">		(Only used if ptype = &#39;LP&#39; to read particles.nnnn_chxx.dbl file, where nnnn is 4 digit integer denotong ns and xx is a 2 digit integer for chunk number : Default value is 0)</span>
+<span class="sd">		</span>
+<span class="sd">		**Outputs**:</span>
+<span class="sd">		pyPLUTO pload object whose keys are arrays of data values.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">Nstep</span> <span class="o">=</span> <span class="n">ns</span>
+		<span class="k">if</span> <span class="n">w_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">w_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">wdir</span> <span class="o">=</span> <span class="n">w_dir</span>
+		<span class="k">if</span> <span class="n">datatype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;dbl&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="o">=</span> <span class="n">datatype</span>
+		<span class="k">if</span> <span class="n">ptype</span> <span class="o">==</span> <span class="s1">&#39;LP&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;dbl&#39;</span><span class="p">,</span> <span class="s1">&#39;flt&#39;</span><span class="p">]:</span>
+			<span class="k">if</span> <span class="n">chnum</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">chnum</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#by default it reads first file. </span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">fname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wdir</span><span class="o">+</span><span class="s2">&quot;particles.</span><span class="si">%04d</span><span class="s2">_ch</span><span class="si">%02d</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">chnum</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">fname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wdir</span><span class="o">+</span><span class="s2">&quot;particles.</span><span class="si">%04d</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span><span class="p">)</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="o">==</span> <span class="s1">&#39;vtk&#39;</span><span class="p">:</span>
+			<span class="n">Part_dictionary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReadVTKParticleFile</span><span class="p">()</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">Part_dictionary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ReadBinParticleFile</span><span class="p">()</span>
+		<span class="k">for</span> <span class="n">keys</span> <span class="ow">in</span> <span class="n">Part_dictionary</span><span class="p">:</span>
+			<span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">,</span> <span class="n">Part_dictionary</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">keys</span><span class="p">))</span>
+
+<div class="viewcode-block" id="ploadparticles.ReadVTKParticleFile">
+<a class="viewcode-back" href="../../modules/ploadparticles.html#pyPLUTO.ploadparticles.ploadparticles.ReadVTKParticleFile">[docs]</a>
+	<span class="k">def</span> <span class="nf">ReadVTKParticleFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading particle file : </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">)</span>
+		<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+		<span class="n">nfields</span> <span class="o">=</span> <span class="mi">0</span>
+	
+		<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+			<span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+			<span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+				<span class="k">pass</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;POINTS&#39;</span><span class="p">:</span>
+					<span class="n">nparts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+					<span class="n">dtype_tup</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">nparts</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;f4&#39;</span>
+					<span class="n">nb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype_tup</span><span class="p">)</span><span class="o">.</span><span class="n">itemsize</span>
+					<span class="n">vtkvar_buf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nb</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype_tup</span><span class="p">))</span>
+					<span class="n">coords</span> <span class="o">=</span> <span class="n">vtkvar_buf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nparts</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+					<span class="n">val_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Totparticles&#39;</span><span class="p">:</span><span class="n">nparts</span><span class="p">,</span> <span class="s1">&#39;x1&#39;</span><span class="p">:</span><span class="n">coords</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;x2&#39;</span><span class="p">:</span><span class="n">coords</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;x3&#39;</span><span class="p">:</span><span class="n">coords</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]}</span>
+					<span class="n">nfields</span> <span class="o">+=</span> <span class="mi">3</span>
+				
+				<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;SCALARS&#39;</span><span class="p">:</span>
+					<span class="nb">vars</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+				<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;LOOKUP_TABLE&#39;</span><span class="p">:</span>
+					<span class="k">if</span> <span class="nb">vars</span> <span class="o">==</span> <span class="s1">&#39;Identity&#39;</span><span class="p">:</span> 
+						<span class="n">dtype_tup</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">nparts</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;i4&#39;</span>
+						<span class="n">field_name</span> <span class="o">=</span> <span class="s1">&#39;id&#39;</span>
+					<span class="k">elif</span> <span class="nb">vars</span> <span class="o">==</span> <span class="s1">&#39;tinj&#39;</span><span class="p">:</span> 
+						<span class="n">dtype_tup</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">nparts</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;f4&#39;</span>
+						<span class="n">field_name</span> <span class="o">=</span> <span class="s1">&#39;tinj&#39;</span>
+					<span class="k">elif</span> <span class="nb">vars</span> <span class="o">==</span> <span class="s1">&#39;Color&#39;</span><span class="p">:</span> 
+						<span class="n">dtype_tup</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">nparts</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;f4&#39;</span>
+						<span class="n">field_name</span> <span class="o">=</span> <span class="s1">&#39;color&#39;</span>
+					<span class="n">nb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype_tup</span><span class="p">)</span><span class="o">.</span><span class="n">itemsize</span>
+					<span class="n">vtkvar_buf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nb</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype_tup</span><span class="p">))</span>
+					<span class="n">val_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">field_name</span><span class="p">:</span><span class="n">vtkvar_buf</span><span class="p">})</span>
+					<span class="n">nfields</span> <span class="o">+=</span> <span class="mi">1</span>
+				<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;VECTORS&#39;</span><span class="p">:</span>
+					<span class="nb">vars</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+					<span class="n">dtype_tup</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">nparts</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;f4&#39;</span>
+					<span class="n">nb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype_tup</span><span class="p">)</span><span class="o">.</span><span class="n">itemsize</span>
+					<span class="n">vtkvar_buf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nb</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">dtype_tup</span><span class="p">))</span>
+					<span class="n">vels</span> <span class="o">=</span> <span class="n">vtkvar_buf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nparts</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+					<span class="n">val_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;vx1&#39;</span><span class="p">:</span><span class="n">vels</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;vx2&#39;</span><span class="p">:</span><span class="n">vels</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;vx3&#39;</span><span class="p">:</span><span class="n">vels</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]})</span>
+					<span class="n">nfields</span> <span class="o">+=</span> <span class="mi">3</span>
+				<span class="k">else</span><span class="p">:</span>
+					<span class="k">pass</span>
+			<span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">:</span>
+				<span class="k">break</span>
+		<span class="n">val_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;nfields&#39;</span><span class="p">:</span><span class="n">nfields</span><span class="p">})</span>
+		<span class="k">return</span> <span class="n">val_dict</span></div>
+
+
+<div class="viewcode-block" id="ploadparticles.ReadBinParticleFile">
+<a class="viewcode-back" href="../../modules/ploadparticles.html#pyPLUTO.ploadparticles.ploadparticles.ReadBinParticleFile">[docs]</a>
+	<span class="k">def</span> <span class="nf">ReadBinParticleFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reading particle file : </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">)</span>
+		<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+		<span class="n">val_dict</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="n">h_lines</span> <span class="o">=</span> <span class="mi">0</span>
+
+		<span class="c1">#READ HEADER. </span>
+		<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fname</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+			<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+				<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+					<span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;PLUTO&#39;</span><span class="p">:</span> 
+						<span class="n">val_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">):[</span><span class="n">i</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">:]]})</span>
+					<span class="n">h_lines</span> <span class="o">+=</span> <span class="mi">1</span>
+		
+		<span class="c1">#SKIP HEADER LINES	</span>
+		<span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+		<span class="k">while</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">&lt;</span> <span class="n">h_lines</span><span class="p">):</span>
+			<span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+			<span class="n">cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+		<span class="c1">#READ DATA</span>
+		<span class="n">data_</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+		<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+		<span class="c1">#SORT DATA INTO DICTIONARY BASED ON DATATYPE.</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">datatype</span> <span class="o">==</span> <span class="s1">&#39;flt&#39;</span><span class="p">:</span>
+			<span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&#39;names&#39;</span><span class="p">:</span><span class="n">val_dict</span><span class="p">[</span><span class="s1">&#39;field_names&#39;</span><span class="p">],</span> <span class="s1">&#39;formats&#39;</span><span class="p">:[</span><span class="s1">&#39;(&#39;</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s1">&#39;,)&lt;f&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">val_dict</span><span class="p">[</span><span class="s1">&#39;field_dim&#39;</span><span class="p">]]})</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">({</span><span class="s1">&#39;names&#39;</span><span class="p">:</span><span class="n">val_dict</span><span class="p">[</span><span class="s1">&#39;field_names&#39;</span><span class="p">],</span> <span class="s1">&#39;formats&#39;</span><span class="p">:[</span><span class="s1">&#39;(&#39;</span><span class="o">+</span><span class="n">i</span><span class="o">+</span><span class="s1">&#39;,)&lt;d&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">val_dict</span><span class="p">[</span><span class="s1">&#39;field_dim&#39;</span><span class="p">]]})</span>
+
+		<span class="n">val_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">data_</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+
+		<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">val_dict</span><span class="p">[</span><span class="s1">&#39;field_names&#39;</span><span class="p">])):</span>
+			<span class="n">name</span> <span class="o">=</span> <span class="n">val_dict</span><span class="p">[</span><span class="s1">&#39;field_names&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+			<span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">val_dict</span><span class="p">[</span><span class="s1">&#39;field_dim&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+				<span class="n">val_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">name</span><span class="p">:</span><span class="n">val_</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()})</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">val_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">name</span><span class="p">:</span><span class="n">val_</span><span class="p">[</span><span class="n">name</span><span class="p">]})</span>
+
+		<span class="c1">#OUTPUT IS A DICTIONARY. </span>
+		<span class="k">return</span> <span class="n">val_dict</span></div>
+</div>
+
+
+
+
+		
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bhargav Vaidya.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
