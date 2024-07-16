@@ -1,5 +1,10 @@
 ChangeLog
 =========
+
+This is the initial release of srpy3d (for sunRunner-Python-3D): version 0.1
+
+The following are changes in the pyPLUTO code which forms the basis for srpy3d: 
+
 CHANGES from 4-1.0 to 4-2.0:
 
 1. The files have now been modified to support Python version >3.6.
