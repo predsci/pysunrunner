@@ -1,7 +1,7 @@
 Pload Module
 ============
 
-.. automodule:: pyPLUTO.pload
+.. automodule:: SRPy.pload
    :members:
    :undoc-members:
    :show-inheritance:

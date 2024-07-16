@@ -1,7 +1,7 @@
 Pload Particles Module
 ======================
 
-.. automodule:: pyPLUTO.ploadparticles
+.. automodule:: SRPy.ploadparticles
    :members:
    :undoc-members:
    :show-inheritance:

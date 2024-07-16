@@ -1,7 +1,7 @@
 Image Module
 ============
 
-.. automodule:: pyPLUTO.Image
+.. automodule:: SRPy.Image
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,7 +1,7 @@
 Tools Module
 ============
 
-.. automodule:: pyPLUTO.Tools
+.. automodule:: SRPy.Tools
    :members:
    :undoc-members:
    :show-inheritance:
