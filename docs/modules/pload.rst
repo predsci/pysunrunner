@@ -1,7 +1,7 @@
 Pload Module
 ============
 
-.. automodule:: PySunRunner.pload
+.. automodule:: pysunrunner.pload
    :members:
    :undoc-members:
    :show-inheritance:

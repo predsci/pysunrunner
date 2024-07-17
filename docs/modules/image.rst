@@ -1,7 +1,7 @@
 Image Module
 ============
 
-.. automodule:: PySunRunner.Image
+.. automodule:: pysunrunner.Image
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,7 +1,7 @@
 Tools Module
 ============
 
-.. automodule:: PySunRunner.Tools
+.. automodule:: pysunrunner.Tools
    :members:
    :undoc-members:
    :show-inheritance:
