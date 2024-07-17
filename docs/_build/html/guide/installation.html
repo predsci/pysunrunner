@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installation &mdash; PySunRunner 4.4.2 documentation</title>
+  <title>Installation &mdash; pysunrunner 4.4.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -34,7 +34,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            PySunRunner
+            pysunrunner
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -48,7 +48,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../guide.html">Guide</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#global-install">Global Install</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global-virtual-env-install">Global/Virtual ENV Install</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-install">Local Install</a></li>
 </ul>
 </li>
@@ -69,7 +69,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">PySunRunner</a>
+          <a href="../index.html">pysunrunner</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -90,29 +90,15 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<p>The current version of SRPy has been updated to support Python version 3 and is tested with &gt; 3.6.</p>
-<section id="global-install">
-<h2>Global Install<a class="headerlink" href="#global-install" title="Link to this heading"></a></h2>
-<p>The Python version from the EPD version by default creates a PYTHONPATH.
-If no option is chosen for preferred path then in that case the code will be installed in that default path.
-This may require the user to have access to the root password:
-Enter into the directory : cd $PLUTO_DIR/Tools/pyPLUTO
-Install the code in the default path: python setup.py install</p>
+<p>The current version of SRPy has been updated to support Python version 3 and is tested with &gt; 3.6, but strongly reccomended to run 3.12 due to dependency errors.</p>
+<section id="global-virtual-env-install">
+<h2>Global/Virtual ENV Install<a class="headerlink" href="#global-virtual-env-install" title="Link to this heading"></a></h2>
+<p>in your global/python envrionment run:</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pysunrunner</span></code></p>
 </section>
 <section id="local-install">
 <h2>Local Install<a class="headerlink" href="#local-install" title="Link to this heading"></a></h2>
-<dl class="simple">
-<dt>The best practice is to create your own PYTHONPATH and do a local install in the following way:</dt><dd><ul class="simple">
-<li><p>Create a directory where to store this module : mkdir MyPython_Modules</p></li>
-<li><p>Enter into the directory : cd $PLUTO_DIR/Tools/pyPLUTO</p></li>
-<li><p>Install the code in the directory created : python setup.py install –prefix=&lt;path to MyPython_Modules&gt;</p></li>
-<li><p>Then append the following in your .bashrc :</p></li>
-<li><p>export PYTHONPATH =&lt;path to MyPython_Modules&gt;/lib/python&lt;ver&gt;/site-packages</p></li>
-<li><p>export PATH =&lt;path to MyPython_Modules&gt;/bin:$PATH</p></li>
-</ul>
-</dd>
-</dl>
-<p>where &lt;ver&gt; is the python version which the user have used to install the package.</p>
+<p>Create a directory (mkdir pysunrunner) and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/BadOmen59/PySunRunner</span></code></p>
 </section>
 </section>
 
