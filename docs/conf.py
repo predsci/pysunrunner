@@ -8,7 +8,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../pyPLUTO'))
+sys.path.insert(0, os.path.abspath('..'))
 
 project = 'PySunRunner'
 copyright = '2024, Bhargav Vaidya'
