@@ -12,9 +12,9 @@ setup(
         'scipy==1.14.0',
         'pillow==10.4.0',
     ],
-    author="Bhargav Vaidya",
-    author_email="bvaidya@iiti.ac.in",
-    description="A package for imaging and plotting data from PLUTO simulations",
+    author="Jackson Riley (pyPLUTO routines by Dr. Bhargav Vaidya)",
+    author_email="jriley@predsci.com",
+    description="A package for imaging and plotting data from sunrunner simulations",
     url="https://github.com/BadOmen59/PySunRunner", 
     classifiers=[
         "Programming Language :: Python :: 3",
