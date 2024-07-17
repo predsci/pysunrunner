@@ -1,7 +1,7 @@
 Tools Module
 ============
 
-.. automodule:: SRPy.Tools
+.. automodule:: PySunRunner.Tools
    :members:
    :undoc-members:
    :show-inheritance:

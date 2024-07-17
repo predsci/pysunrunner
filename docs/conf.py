@@ -10,7 +10,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../pyPLUTO'))
 
-project = 'SRPy'
+project = 'PySunRunner'
 copyright = '2024, Bhargav Vaidya'
 author = 'Bhargav Vaidya'
 release = '4.4.2'

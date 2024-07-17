@@ -1,7 +1,7 @@
 Image Module
 ============
 
-.. automodule:: SRPy.Image
+.. automodule:: PySunRunner.Image
    :members:
    :undoc-members:
    :show-inheritance:

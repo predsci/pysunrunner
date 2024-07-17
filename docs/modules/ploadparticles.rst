@@ -1,7 +1,7 @@
 Pload Particles Module
 ======================
 
-.. automodule:: SRPy.ploadparticles
+.. automodule:: PySunRunner.ploadparticles
    :members:
    :undoc-members:
    :show-inheritance:
