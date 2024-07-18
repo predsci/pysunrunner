@@ -4,6 +4,8 @@ from . import pload
 from . import ploadparticles
 from . import Tools
 from . import Image
+from . import pviz
+from . import io 
 
 
 def nlast_info(w_dir=None,datatype=None):
