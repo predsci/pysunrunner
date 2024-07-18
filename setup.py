@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pysunrunner",
-    version="4.5.0,
+    version="4.5.0",
     packages=find_packages(),
     install_requires=[
         'numpy==2.0.0',
