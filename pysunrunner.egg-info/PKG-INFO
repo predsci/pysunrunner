@@ -1,10 +1,10 @@
 Metadata-Version: 2.1
 Name: pysunrunner
-Version: 4.4.4
-Summary: A package for imaging and plotting data from PLUTO simulations
+Version: 4.4.8
+Summary: A package for imaging and plotting data from sunrunner simulations
 Home-page: https://github.com/BadOmen59/PySunRunner
-Author: Bhargav Vaidya
-Author-email: bvaidya@iiti.ac.in
+Author: Jackson Riley (pyPLUTO routines by Dr. Bhargav Vaidya)
+Author-email: jriley@predsci.com
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
