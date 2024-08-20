@@ -4,13 +4,10 @@ README.md
 pyproject.toml
 requirements.txt
 setup.py
-pysunrunner/Image.py
 pysunrunner/Tools.py
 pysunrunner/__init__.py
 pysunrunner/io.py
 pysunrunner/pload.py
-pysunrunner/ploadparticles.py
-pysunrunner/ploadparticles_v00.py
 pysunrunner/pviz.py
 pysunrunner.egg-info/PKG-INFO
 pysunrunner.egg-info/SOURCES.txt

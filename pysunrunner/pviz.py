@@ -1,16 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_equatorial_cut(data, r_coords, t_coords, p_coords, ax, cmap = None, title = None, r_scale = False, log_scale = False, 
+def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_scale = False, log_scale = False, 
     zmin = None, zmax = None):
     """
     Function to plot the equatorial cut.
 
     Parameters:
-    D: PLUTO 3D array of data values.
-    r_coords: array representing the r grid
-    t_coords: array representing the theta grid
-    p_coords: array representing the phi grid
+    D: PLUTO 3D array of data values
+    var_name: variable to plot
     cmap: colormap name
     title: plot title
     r_scale (logical): if True scaled data is plotted (x R^2)
@@ -31,8 +29,17 @@ def plot_equatorial_cut(data, r_coords, t_coords, p_coords, ax, cmap = None, tit
     if title is None:
         title = ''
 
+    # the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)
+    r_coords = np.array(D.x1)
+    t_coords = np.array(D.x2)
+    p_coords = np.array(D.x3)
+    
     # Convert from co-latitude to latitude
     t_coords = np.pi/2 - t_coords
+
+    # retrieve the data to be plotted
+    data = getattr(D, var_name)
+
     # calculate R^2
     if (r_scale):
         r2_coords = np.multiply(r_coords, r_coords)
@@ -59,25 +66,23 @@ def plot_equatorial_cut(data, r_coords, t_coords, p_coords, ax, cmap = None, tit
     Z = tmp.T
     c = ax.pcolormesh(phi_grid, r_grid, Z, shading='auto', cmap=cmap, vmin = zmin, vmax = zmax)
     ax.set_title(title)
-    ax.grid(False, axis ='y')  # Remove R grid
+    ax.grid(True, axis ='y')  # show R grid
     ax.grid(False, axis ='x')  # Remove angle grid
     ax.set_ylim(0, np.max(r_coords))
-    ax.set_yticks([]) # remove the R labels  (remove line if we want to keep it)    
+    # ax.set_yticks([]) # remove the R labels  (remove line if we want to keep it)    
     colorbar = plt.colorbar(c, ax=ax, orientation='horizontal', shrink = 0.5, aspect = 20)
 
     return ax
 
 
-def plot_phi_cut(data, r_coords, t_coords, p_coords, ax, phi_cut = np.pi, cmap = None, title = None, r_scale = False, log_scale = False, 
-    zmin = None, zmax = None):
+def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = None, 
+    r_scale = False, log_scale = False, zmin = None, zmax = None):
     """
     Function to plot phi cut.
 
     Parameters:
     D: PLUTO 3D array of data values.
-    r_coords: array representing the r grid
-    t_coords: array representing the theta grid
-    p_coords: array representing the phi grid
+    var_name: variable to plot
     phi_cut: angle in radians for phi_cut, default is meridonial
     cmap: colormap name
     title: plot title
@@ -87,7 +92,7 @@ def plot_phi_cut(data, r_coords, t_coords, p_coords, ax, phi_cut = np.pi, cmap =
     zmax (scalar): Maximum value for color scaling
  
     **Outputs**:
-    ax: subplot with equitorial cut of data
+    ax: subplot with phi cut of data
     """
 
     if cmap is None:
@@ -99,9 +104,16 @@ def plot_phi_cut(data, r_coords, t_coords, p_coords, ax, phi_cut = np.pi, cmap =
     if title is None:
         title = ''
 
+    # the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)
+    r_coords = np.array(D.x1)
+    t_coords = np.array(D.x2)
+    p_coords = np.array(D.x3)
     # Convert from co-latitude to latitude
     t_coords = np.pi/2 - t_coords
 
+    #Extract data for plotting
+
+    data = getattr(D, var_name)
     # calculate R^2
     if (r_scale):
         r2_coords = np.multiply(r_coords, r_coords)
@@ -109,7 +121,7 @@ def plot_phi_cut(data, r_coords, t_coords, p_coords, ax, phi_cut = np.pi, cmap =
     # Create a meshgrid for theta and R
     t_grid, r_grid = np.meshgrid(t_coords, r_coords)
 
-    # Find the index where phi is to phi_cut
+    # Find the index where phi is closest to phi_cut
 
     phi_index = np.argmin(np.abs(p_coords - phi_cut))
 
@@ -134,18 +146,16 @@ def plot_phi_cut(data, r_coords, t_coords, p_coords, ax, phi_cut = np.pi, cmap =
 
     return ax
 
-def plot_slice(data, r_coords, t_coords, p_coords, ax, r_cut = None, theta_cut = np.pi/2.0, phi_cut = np.pi, cmap = None, title = None, 
+def plot_slice(D, ax, var_name = 'vx1', r_cut = None, theta_cut = 0.0, phi_cut = np.pi, cmap = None, title = None, 
     xlabel = 'R (AU)', ylabel = 'V (km s$^{s-1}$)', r_scale = False, log_scale = False, ymin = None, ymax = None):
     """
     Function to plot 1-D slices
 
     Parameters:
-    data: PLUTO 3D array of data values.
-    r_coords: array representing the r grid
-    t_coords: array representing the theta grid
-    p_coords: array representing the phi grid
+    D: PLUTO 3D array of data values.
+    var_name: variable name for plotting
     r_cut: distance in AU for an r-cut, if None data plotted as a function of r
-    theta_cut: angle in radians for a theta-cut, default is equatorial, if None cuts are plotted as a function of theta
+    theta_cut: latitude angle in radians for a theta-cut, default is equatorial, if None cuts are plotted as a function of theta
     phi_cut: angle in radians for phi-cut, default is meridonial, if None cuts are plotted as a function of phi
     cmap: colormap name
     title: plot title
@@ -154,7 +164,7 @@ def plot_slice(data, r_coords, t_coords, p_coords, ax, r_cut = None, theta_cut =
     r_scale (logical): if True scaled data is plotted (x R^2)
     log_scale (logical): if True log10 of data is plotted
     ymin (scalar): Minumum y-axis value for plot
-    ymax (scalar): Maximum vy-axis value for plot
+    ymax (scalar): Maximum y-axis value for plot
  
     **Outputs**:
     ax: A plot with one or more slices
@@ -166,13 +176,24 @@ def plot_slice(data, r_coords, t_coords, p_coords, ax, r_cut = None, theta_cut =
     if title is None:
         title = ''
     
+    if xlabel is None:
+        xlabel = 'x-axis'
+
+    if ylabel is None:
+        ylabel = 'y-axis'
+
+    # the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)
+    r_coords = np.array(D.x1)
+    t_coords = np.array(D.x2)
+    p_coords = np.array(D.x3)
+
     # Convert from co-latitude to latitude
     t_coords = np.pi/2 - t_coords
-    theta_cut = np.pi/2 - theta_cut
-
-
-    # for all of these need to also define slice_dim - it can be either 0 or 1 
     
+    # Extract the vx1 data 
+    data = getattr(D, var_name)
+
+    # determine what each dimension of r, t, p is (i.e., what is the x-axis for the plot which dimension)    
     if r_cut is None:
         theta_cut = np.array(theta_cut)
         phi_cut = np.array(phi_cut)
@@ -244,7 +265,7 @@ def plot_slice(data, r_coords, t_coords, p_coords, ax, r_cut = None, theta_cut =
 
     n_slice = len(slice_index)
     indices = np.linspace(0, 1, n_slice)
-    # cmap = plt.colormaps[cmap)
+    # cmap = plt.colormaps[cmap]
     cmap = plt.cm.get_cmap(cmap)
     colors = cmap(indices)
 
@@ -272,10 +293,140 @@ def plot_slice(data, r_coords, t_coords, p_coords, ax, r_cut = None, theta_cut =
             ax.plot(x, y, color = colors[jcount], label = label[jcount])
             jcount = jcount + 1
 
-# Set ymin and ymax
+    #Set ymin and ymax
     plt.ylim(ymin, ymax)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.legend()
 
     return ax
+
+def plot_stack(pluto_list, ax, var_name = 'vx1', r_val = 1.0, t_val = 0.0, p_val=np.pi, stack_dim = 'p', time= None, 
+    cmap = None, title = None, 
+    xlabel = 'Time [hours]', ylabel = '', log_scale = False, yshift=None):
+    """
+    Function For a 1-D stack plot
+    Parameters:
+    pluto_list: A list with each item a PLUTO 3D array of data values
+    var_name: variable name for plotting
+    r_val: distance (in AU) for cut
+    t_val: latitude (in radians) for cut
+    p_val: longitude (in radians) for 
+    stack_dim: dimension for the stack plot (r, t, or p)
+    time: time array (units are hours)
+    cmap: colormap name
+    title: plot title
+    xlabel: x-axis label
+    ylabel: y-axis label
+    r_scale (logical): if True scaled data is plotted (x R^2)
+    log_scale (logical): if True log10 of data is plotted
+    ymin (scalar): Minumum y-axis value for plot
+    ymax (scalar): Maximum y-axis value for plot
+ 
+    **Outputs**:
+    ax: A plot with one or more slices
+    """
+
+
+    if yshift is None:
+        yshift = 0.0
+
+    if xlabel is None:
+        xlabel = 'x-axis'
+    if ylabel is None:
+        ylabel = 'y-axis'
+
+    # retrieve the first element in the list so we can retrieve the coordinates
+    D = pluto_list[0]
+
+
+    # the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)
+    r_coords = np.array(D.x1)
+    t_coords = np.array(D.x2)
+    p_coords = np.array(D.x3)
+    # convert t_coords wfrom co-latitude to latitude
+
+    t_coords = np.pi/2 - t_coords
+
+    # Number of time steps/elemts in the pluto_list
+
+    ntimes = len(pluto_list)
+
+    # find the r_index for the plot
+    if stack_dim != 'r':
+        r_idx = np.argmin(np.abs(r_coords- r_val))
+    else:
+        n_slice = len(r_val)
+        r_idx = np.zeros(n_slice, dtype=int)
+        labels = np.zeros(n_slice, dtype=int)
+        icount = 0
+        for r_slice in r_val:
+            r_idx[icount] = np.argmin(np.abs(r_coords - r_slice))
+            labels[icount] = np.round(p_coords[p_idx[icount]]).astype(int)
+            icount = icount + 1
+
+    # repeat for t_index
+    if stack_dim != 't':
+        t_idx = np.argmin(np.abs(t_coords - t_val))
+    else:
+        n_slice = len(t_val)
+        t_idx = np.zeros(n_slice, dtype=int)
+        labels = np.zeros(n_slice, dtype=int)
+        icount = 0
+        for th_slice in t_val:
+            t_idx[icount] = np.argmin(np.abs(t_coords - th_slice))
+            labels[icount] = np.round(np.rad2deg(t_coords[t_idx[icount]])).astype(int)
+            icount = icount + 1
+
+    # and for p_index:
+    if stack_dim != 'p':
+        p_idx = np.argmin(np.abs(p_coords - p_val))
+    else: 
+        n_slice = len(p_val)
+        p_idx = np.zeros(n_slice, dtype=int)
+        labels = np.zeros(n_slice, dtype=int)
+        icount = 0
+        for fi_slice in p_val:
+            p_idx[icount] = np.argmin(np.abs(p_coords - fi_slice))
+            labels[icount] = np.round(np.rad2deg(p_coords[p_idx[icount]])).astype(int)
+            icount = icount + 1
+
+    array_2d = np.zeros((n_slice, ntimes))
+    
+    for ii in range(0, ntimes):
+        D = pluto_list[ii]
+        data = getattr(D, var_name)
+        array_2d[:,ii] = data[r_idx, t_idx,p_idx]
+        
+    if log_scale:
+        array_2d = np.log10(array_2d)
+
+    # remove all time elements prior to the CME launch
+    
+    time = [x for x in time if x >= 0]
+
+    #cmap = plt.colormaps[cmap]
+    cmap = plt.cm.get_cmap('rainbow')
+    indices = np.linspace(0, 1, n_slice)
+    colors = cmap(indices)
+
+    # location for vertical line
+
+    x_value = 10
+    y1 = 2000
+    y2 = y1 * 2
+
+    for ii in range(0, n_slice):
+        tmp = array_2d[ii,:] + yshift * ii
+        ax.plot(time, tmp, color=colors[ii], linestyle='-', linewidth=1, label = labels[ii]) 
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.xlim(np.min(time),np.max(time)) # limit xrange to be 0-40 hours
+    plt.gca().set_yticklabels([]) # remove y-ticks labels for stack plot
+    plt.vlines(x=x_value, ymin=y1, ymax=y2, colors='black', linewidth=2)
+    plt.legend(loc='center left', bbox_to_anchor=(0.8, 0.5))
+    # plt.legend()
+
+    return ax
+
+
