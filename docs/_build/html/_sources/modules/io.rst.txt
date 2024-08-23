@@ -1,7 +1,7 @@
-Image Module
+io Module
 ============
 
-.. automodule:: pysunrunner.Image
+.. automodule:: pysunrunner.io
    :members:
    :undoc-members:
    :show-inheritance:

@@ -4,7 +4,7 @@ Modules
 .. toctree::
    :maxdepth: 4
 
-   modules/image
    modules/pload
-   modules/ploadparticles
+   modules/pviz
    modules/tools
+   modules/io

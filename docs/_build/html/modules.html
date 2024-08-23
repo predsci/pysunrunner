@@ -21,7 +21,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Image Module" href="modules/image.html" />
+    <link rel="next" title="Pload Module" href="modules/pload.html" />
     <link rel="prev" title="Examples" href="examples.html" /> 
 </head>
 
@@ -49,10 +49,10 @@
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Modules</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules/image.html">Image Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules/pload.html">Pload Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modules/ploadparticles.html">Pload Particles Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/pviz.html">pvis Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modules/tools.html">Tools Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/io.html">io Module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">ChangeLog</a></li>
@@ -87,21 +87,6 @@
 <h1>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules/image.html">Image Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image"><code class="docutils literal notranslate"><span class="pre">Image</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.field_interp"><code class="docutils literal notranslate"><span class="pre">Image.field_interp()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.field_line"><code class="docutils literal notranslate"><span class="pre">Image.field_line()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.getPolarData"><code class="docutils literal notranslate"><span class="pre">Image.getPolarData()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.getSphData"><code class="docutils literal notranslate"><span class="pre">Image.getSphData()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.multi_disp"><code class="docutils literal notranslate"><span class="pre">Image.multi_disp()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.myfieldlines"><code class="docutils literal notranslate"><span class="pre">Image.myfieldlines()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.oplotbox"><code class="docutils literal notranslate"><span class="pre">Image.oplotbox()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.pldisplay"><code class="docutils literal notranslate"><span class="pre">Image.pldisplay()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/image.html#pysunrunner.Image.Image.pltSphData"><code class="docutils literal notranslate"><span class="pre">Image.pltSphData()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="modules/pload.html">Pload Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modules/pload.html#pysunrunner.pload.pload"><code class="docutils literal notranslate"><span class="pre">pload</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="modules/pload.html#pysunrunner.pload.pload.DataScan"><code class="docutils literal notranslate"><span class="pre">pload.DataScan()</span></code></a></li>
@@ -117,12 +102,11 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="modules/ploadparticles.html">Pload Particles Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="modules/ploadparticles.html#pysunrunner.ploadparticles.ploadparticles"><code class="docutils literal notranslate"><span class="pre">ploadparticles</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="modules/ploadparticles.html#pysunrunner.ploadparticles.ploadparticles.ReadBinParticleFile"><code class="docutils literal notranslate"><span class="pre">ploadparticles.ReadBinParticleFile()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="modules/ploadparticles.html#pysunrunner.ploadparticles.ploadparticles.ReadVTKParticleFile"><code class="docutils literal notranslate"><span class="pre">ploadparticles.ReadVTKParticleFile()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="modules/pviz.html">pvis Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/pviz.html#pysunrunner.pviz.plot_equatorial_cut"><code class="docutils literal notranslate"><span class="pre">plot_equatorial_cut()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/pviz.html#pysunrunner.pviz.plot_phi_cut"><code class="docutils literal notranslate"><span class="pre">plot_phi_cut()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/pviz.html#pysunrunner.pviz.plot_slice"><code class="docutils literal notranslate"><span class="pre">plot_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/pviz.html#pysunrunner.pviz.plot_stack"><code class="docutils literal notranslate"><span class="pre">plot_stack()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules/tools.html">Tools Module</a><ul>
@@ -140,6 +124,11 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="modules/io.html">io Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/io.html#pysunrunner.io.nlast_info"><code class="docutils literal notranslate"><span class="pre">nlast_info()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules/io.html#pysunrunner.io.read_time"><code class="docutils literal notranslate"><span class="pre">read_time()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -149,7 +138,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="modules/image.html" class="btn btn-neutral float-right" title="Image Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules/pload.html" class="btn btn-neutral float-right" title="Pload Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

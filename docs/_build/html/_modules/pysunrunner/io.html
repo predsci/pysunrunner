@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pysunrunner.io &mdash; pysunrunner 4.4.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=bca0d8b2"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            pysunrunner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guide.html">Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pysunrunner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">pysunrunner.io</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pysunrunner.io</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="read_time">
+<a class="viewcode-back" href="../../modules/io.html#pysunrunner.io.read_time">[docs]</a>
+<span></span><span class="k">def</span> <span class="nf">read_time</span><span class="p">(</span><span class="n">w_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; read the dbl.out file to get the time information for each dump</span>
+
+<span class="sd">    **Inputs**:</span>
+<span class="sd">    </span>
+<span class="sd">      w_dir -- path to the directory which has the dbl.out(or flt.out) and the data\n</span>
+<span class="sd">      datatype -- If the data is of &#39;float&#39; type then datatype = &#39;flt&#39; else by default the datatype is set to &#39;dbl&#39; (Double precision).</span>
+
+<span class="sd">        **Outputs**:</span>
+<span class="sd">    </span>
+<span class="sd">      This function returns a dictionary with following keywords - \n</span>
+
+<span class="sd">      nlast -- The ns for the last file saved.\n</span>
+<span class="sd">      time -- The simulation time for the last file saved.\n</span>
+<span class="sd">      dt -- The time step dt for the last file. \n</span>
+<span class="sd">      Nstep -- The Nstep value for the last file saved.</span>
+
+
+<span class="sd">    **Usage**:</span>
+<span class="sd">    </span>
+<span class="sd">      In case the data is &#39;float&#39;.</span>
+
+<span class="sd">      ``wdir = /path/to/data/directory``\n</span>
+<span class="sd">      ``import pyPLUTO as pp``\n</span>
+<span class="sd">      ``A = pp.nlast_info(w_dir=wdir,datatype=&#39;float&#39;)``    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">w_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">w_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span>
+    <span class="k">if</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s1">&#39;flt&#39;</span><span class="p">:</span>
+        <span class="n">fname_v</span> <span class="o">=</span> <span class="n">w_dir</span><span class="o">+</span><span class="s2">&quot;flt.out&quot;</span>
+    <span class="k">elif</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s1">&#39;vtk&#39;</span><span class="p">:</span>
+        <span class="n">fname_v</span> <span class="o">=</span> <span class="n">w_dir</span><span class="o">+</span><span class="s2">&quot;vtk.out&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fname_v</span> <span class="o">=</span> <span class="n">w_dir</span><span class="o">+</span><span class="s2">&quot;dbl.out&quot;</span>
+
+    <span class="n">time</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname_v</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+      <span class="n">fields</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            
+    <span class="k">return</span> <span class="n">time</span></div>
+
+    
+
+
+<div class="viewcode-block" id="nlast_info">
+<a class="viewcode-back" href="../../modules/io.html#pysunrunner.io.nlast_info">[docs]</a>
+<span class="k">def</span> <span class="nf">nlast_info</span><span class="p">(</span><span class="n">w_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Prints the information of the last step of the simulation as obtained from out files</span>
+
+<span class="sd">    **Inputs**:</span>
+<span class="sd">    </span>
+<span class="sd">      w_dir -- path to the directory which has the dbl.out(or flt.out) and the data\n</span>
+<span class="sd">      datatype -- If the data is of &#39;float&#39; type then datatype = &#39;flt&#39; else by default the datatype is set to &#39;dbl&#39; (Double precision).</span>
+
+<span class="sd">        **Outputs**:</span>
+<span class="sd">    </span>
+<span class="sd">      This function returns a dictionary with following keywords - \n</span>
+
+<span class="sd">      nlast -- The ns for the last file saved.\n</span>
+<span class="sd">      time -- The simulation time for the last file saved.\n</span>
+<span class="sd">      dt -- The time step dt for the last file. \n</span>
+<span class="sd">      Nstep -- The Nstep value for the last file saved.</span>
+
+
+<span class="sd">    **Usage**:</span>
+<span class="sd">    </span>
+<span class="sd">      In case the data is &#39;float&#39;.</span>
+
+<span class="sd">      ``wdir = /path/to/data/directory``\n</span>
+<span class="sd">      ``import pyPLUTO as pp``\n</span>
+<span class="sd">      ``A = pp.nlast_info(w_dir=wdir,datatype=&#39;float&#39;)``    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">w_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">w_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span>
+    <span class="k">if</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s1">&#39;flt&#39;</span><span class="p">:</span>
+        <span class="n">fname_v</span> <span class="o">=</span> <span class="n">w_dir</span><span class="o">+</span><span class="s2">&quot;flt.out&quot;</span>
+    <span class="k">elif</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s1">&#39;vtk&#39;</span><span class="p">:</span>
+        <span class="n">fname_v</span> <span class="o">=</span> <span class="n">w_dir</span><span class="o">+</span><span class="s2">&quot;vtk.out&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fname_v</span> <span class="o">=</span> <span class="n">w_dir</span><span class="o">+</span><span class="s2">&quot;dbl.out&quot;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname_v</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="n">last_line</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        
+    <span class="n">nlast</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">last_line</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">SimTime</span> <span class="o">=</span>  <span class="nb">float</span><span class="p">(</span><span class="n">last_line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">Dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">last_line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">Nstep</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">last_line</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;------------TIME INFORMATION--------------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nlast = </span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">nlast</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;time  =</span><span class="si">%f</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">SimTime</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;dt    =</span><span class="si">%f</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">Dt</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nstep =</span><span class="si">%d</span><span class="s1">&#39;</span><span class="o">%</span><span class="n">Nstep</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------------------------------------&quot;</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;nlast&#39;</span><span class="p">:</span><span class="n">nlast</span><span class="p">,</span><span class="s1">&#39;time&#39;</span><span class="p">:</span><span class="n">SimTime</span><span class="p">,</span><span class="s1">&#39;dt&#39;</span><span class="p">:</span><span class="n">Dt</span><span class="p">,</span><span class="s1">&#39;Nstep&#39;</span><span class="p">:</span><span class="n">Nstep</span><span class="p">}</span></div>
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Bhargav Vaidya.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
