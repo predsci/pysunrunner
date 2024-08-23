@@ -1,7 +1,7 @@
 Installation
 ============
 
-The current version of SRPy has been updated to support Python version 3 and is tested with > 3.6, but strongly reccomended to run 3.12 due to dependency errors.
+The current version of sunRunner3D has been updated to support Python version 3 and is tested with > 3.6, but strongly reccomended to run 3.12 due to dependency errors.
 
 Global/Virtual ENV Install
 --------------------------
@@ -13,4 +13,4 @@ in your global/python envrionment run:
 Local Install 
 -------------
 
-Create a directory (mkdir pysunrunner) and ``git clone https://github.com/BadOmen59/PySunRunner``
+``git clone https://github.com/predsci/pysunrunner``
