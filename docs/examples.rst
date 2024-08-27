@@ -73,7 +73,7 @@ Example #1: Equatorial Slice
 Example #2: Meridonial Slice
 ----------------------------
 
-.. image:: _static/sr_ex_eq_plot.png
+.. image:: _static/sr_ex_phi_plot.png
 
 .. code-block:: python
 
@@ -138,13 +138,16 @@ Example #2: Meridonial Slice
     # Set r_scale to True to apply r^2 scaling (useful for variables like scaled radial magnetic field or density)
     r_scale = True
 
+    # convert from code units to nT
+    b_fac_pluto = 0.0458505
+    
     # Create a figure with a single subplot using polar projection
     fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))
 
     # Plot the phi cut of the data on the polar projection
     ax = pviz.plot_phi_cut(D=D, var_name = var_name,
         phi_cut = phi_cut, ax = ax,cmap = cmap, title = title,
-        r_scale = r_scale, log_scale=log_scale, zmin = zmin, zmax = zmax)
+        r_scale = r_scale, log_scale=log_scale, zmin = zmin, zmax = zmax, conversion_units = b_fac_pluto)
 
     plt.show()
     

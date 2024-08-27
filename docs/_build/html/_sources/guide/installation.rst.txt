@@ -1,7 +1,7 @@
 Installation
 ============
 
-The current version of sunRunner3D has been updated to support Python version 3 and is tested with > 3.6, but strongly reccomended to run 3.12 due to dependency errors.
+The current version of pysunrunner has been updated to support Python version 3 and is tested with > 3.6, but strongly reccomended to run 3.12 due to dependency errors.
 
 Global/Virtual ENV Install
 --------------------------

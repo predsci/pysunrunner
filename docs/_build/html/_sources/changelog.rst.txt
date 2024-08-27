@@ -3,7 +3,7 @@ ChangeLog
 
 This is the initial release of PySunRunner: version 0.1
 
-The following are changes in the pyPLUTO code which forms the basis for srpy3d: 
+The following are changes in the pyPLUTO code which forms the basis for pysunrunner: 
 
 CHANGES from 4-1.0 to 4-2.0:
 

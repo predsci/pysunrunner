@@ -1,5 +1,5 @@
-.. pysr3d documentation master file, created by
-   sphinx-quickstart on Fri Jul 12 15:46:19 2024.
+.. pysunrunner documentation master file, created by
+   sphinx-quickstart on August 27 15:46:19 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 

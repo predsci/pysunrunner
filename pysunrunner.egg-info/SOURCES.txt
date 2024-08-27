@@ -6,6 +6,7 @@ requirements.txt
 setup.py
 pysunrunner/Tools.py
 pysunrunner/__init__.py
+pysunrunner/example_equi_slice.py
 pysunrunner/io.py
 pysunrunner/pload.py
 pysunrunner/pviz.py

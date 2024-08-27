@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pvis Module &mdash; pysunrunner 4.4.2 documentation</title>
+  <title>pvis Module &mdash; pysunrunner 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=bca0d8b2"></script>
+        <script src="../_static/documentation_options.js?v=2709fde1"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -94,7 +94,7 @@
 <span id="pvis-module"></span><h1>pvis Module<a class="headerlink" href="#module-pysunrunner.pviz" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pysunrunner.pviz.plot_equatorial_cut">
-<span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_equatorial_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_equatorial_cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_equatorial_cut" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_equatorial_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_equatorial_cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_equatorial_cut" title="Link to this definition"></a></dt>
 <dd><p>Function to plot the equatorial cut.</p>
 <p>Parameters:
 D: PLUTO 3D array of data values
@@ -103,15 +103,16 @@ cmap: colormap name
 title: plot title
 r_scale (logical): if True scaled data is plotted (x R^2)
 log_scale (logical): if True log10 of data is plotted
-zmin (scalar): Minumum value for color scaling
-zmax (scalar): Maximum value for color scaling</p>
-<p><strong>Outputs</strong>:
+zmin (scalar): Minimum value for color scaling
+zmax (scalar): Maximum value for color scaling
+conversion_units (scalar): factor to convert units. If None, no conversion
+<strong>Outputs</strong>:
 ax: subplot with equitorial cut of data</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pysunrunner.pviz.plot_phi_cut">
-<span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_phi_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_phi_cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_phi_cut" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_phi_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_phi_cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_phi_cut" title="Link to this definition"></a></dt>
 <dd><p>Function to plot phi cut.</p>
 <p>Parameters:
 D: PLUTO 3D array of data values.
@@ -121,15 +122,16 @@ cmap: colormap name
 title: plot title
 r_scale (logical): if True scaled data is plotted (x R^2)
 log_scale (logical): if True log10 of data is plotted
-zmin (scalar): Minumum value for color scaling
-zmax (scalar): Maximum value for color scaling</p>
+zmin (scalar): Minimum value for color scaling
+zmax (scalar): Maximum value for color scaling
+conversion_units (scalar): factor to convert units.  If None, no conversion</p>
 <p><strong>Outputs</strong>:
 ax: subplot with phi cut of data</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pysunrunner.pviz.plot_slice">
-<span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'R</span> <span class="pre">(AU)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V</span> <span class="pre">(km</span> <span class="pre">s$^{s-1}$)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_slice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_slice" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'R</span> <span class="pre">(AU)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V</span> <span class="pre">(km</span> <span class="pre">s$^{s-1}$)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_slice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_slice" title="Link to this definition"></a></dt>
 <dd><p>Function to plot 1-D slices</p>
 <p>Parameters:
 D: PLUTO 3D array of data values.
@@ -143,8 +145,9 @@ xlabel: x-axis label
 ylabel: y-axis label
 r_scale (logical): if True scaled data is plotted (x R^2)
 log_scale (logical): if True log10 of data is plotted
-ymin (scalar): Minumum y-axis value for plot
-ymax (scalar): Maximum y-axis value for plot</p>
+ymin (scalar): Minimum y-axis value for plot
+ymax (scalar): Maximum y-axis value for plot
+conversion_units (scalar): factor to convert units.  If None, no conversion</p>
 <p><strong>Outputs</strong>:
 ax: A plot with one or more slices</p>
 </dd></dl>
@@ -166,9 +169,7 @@ title: plot title
 xlabel: x-axis label
 ylabel: y-axis label
 r_scale (logical): if True scaled data is plotted (x R^2)
-log_scale (logical): if True log10 of data is plotted
-ymin (scalar): Minumum y-axis value for plot
-ymax (scalar): Maximum y-axis value for plot</p>
+log_scale (logical): if True log10 of data is plotted</p>
 <p><strong>Outputs</strong>:
 ax: A plot with one or more slices</p>
 </dd></dl>
@@ -186,7 +187,7 @@ ax: A plot with one or more slices</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Bhargav Vaidya.</p>
+    <p>&#169; Copyright 2024, Predictive Science Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

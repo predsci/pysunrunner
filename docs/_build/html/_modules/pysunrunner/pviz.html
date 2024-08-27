@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pysunrunner.pviz &mdash; pysunrunner 4.4.2 documentation</title>
+  <title>pysunrunner.pviz &mdash; pysunrunner 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=bca0d8b2"></script>
+        <script src="../../_static/documentation_options.js?v=2709fde1"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -81,7 +81,7 @@
 <div class="viewcode-block" id="plot_equatorial_cut">
 <a class="viewcode-back" href="../../modules/pviz.html#pysunrunner.pviz.plot_equatorial_cut">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_equatorial_cut</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">var_name</span> <span class="o">=</span> <span class="s1">&#39;vx1&#39;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">r_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> 
-    <span class="n">zmin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">zmin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">conversion_units</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to plot the equatorial cut.</span>
 
@@ -92,21 +92,20 @@
 <span class="sd">    title: plot title</span>
 <span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
 <span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
-<span class="sd">    zmin (scalar): Minumum value for color scaling</span>
+<span class="sd">    zmin (scalar): Minimum value for color scaling</span>
 <span class="sd">    zmax (scalar): Maximum value for color scaling</span>
-<span class="sd"> </span>
+<span class="sd">    conversion_units (scalar): factor to convert units. If None, no conversion </span>
 <span class="sd">    **Outputs**:</span>
 <span class="sd">    ax: subplot with equitorial cut of data</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;rainbow&#39;</span>
-    <span class="k">if</span> <span class="n">zmin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">zmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">zmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">zmax</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+ 
     <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">conversion_units</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">conversion_units</span> <span class="o">=</span> <span class="mf">1.0</span>
 
     <span class="c1"># the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)</span>
     <span class="n">r_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
@@ -119,13 +118,22 @@
     <span class="c1"># retrieve the data to be plotted</span>
     <span class="n">data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">var_name</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">zmin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">zmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="n">zmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">zmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># convert units </span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">*</span> <span class="n">conversion_units</span>
+    <span class="n">zmin</span> <span class="o">=</span> <span class="n">zmin</span> <span class="o">*</span> <span class="n">conversion_units</span>
+    <span class="n">zmax</span> <span class="o">=</span> <span class="n">zmax</span> <span class="o">*</span> <span class="n">conversion_units</span>
+
     <span class="c1"># calculate R^2</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">r_scale</span><span class="p">):</span>
         <span class="n">r2_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">r_coords</span><span class="p">,</span> <span class="n">r_coords</span><span class="p">)</span>
 
     <span class="c1"># Create a meshgrid for spherical coordinates</span>
     <span class="n">phi_grid</span><span class="p">,</span> <span class="n">r_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">p_coords</span><span class="p">,</span> <span class="n">r_coords</span><span class="p">)</span>
-
 
     <span class="c1"># Find the index where theta is closest to 0 (equatorial plane)</span>
 
@@ -150,7 +158,7 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">r_coords</span><span class="p">))</span>
     <span class="c1"># ax.set_yticks([]) # remove the R labels  (remove line if we want to keep it)    </span>
     <span class="n">colorbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">shrink</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">aspect</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
-
+   <span class="c1">#colorbar.set_label(cbar_label, fontsize=12)  # To add label for color bar</span>
     <span class="k">return</span> <span class="n">ax</span></div>
 
 
@@ -158,7 +166,7 @@
 <div class="viewcode-block" id="plot_phi_cut">
 <a class="viewcode-back" href="../../modules/pviz.html#pysunrunner.pviz.plot_phi_cut">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_phi_cut</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">var_name</span> <span class="o">=</span> <span class="s1">&#39;vx1&#39;</span><span class="p">,</span> <span class="n">phi_cut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
-    <span class="n">r_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">r_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">conversion_units</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to plot phi cut.</span>
 
@@ -170,21 +178,22 @@
 <span class="sd">    title: plot title</span>
 <span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
 <span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
-<span class="sd">    zmin (scalar): Minumum value for color scaling</span>
+<span class="sd">    zmin (scalar): Minimum value for color scaling</span>
 <span class="sd">    zmax (scalar): Maximum value for color scaling</span>
-<span class="sd"> </span>
+<span class="sd">    conversion_units (scalar): factor to convert units.  If None, no conversion </span>
+
 <span class="sd">    **Outputs**:</span>
 <span class="sd">    ax: subplot with phi cut of data</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;rainbow&#39;</span>
-    <span class="k">if</span> <span class="n">zmin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">zmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">zmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">zmax</span> <span class="o">=</span> <span class="n">np</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">conversion_units</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">conversion_units</span> <span class="o">=</span> <span class="mf">1.0</span>
+
 
     <span class="c1"># the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)</span>
     <span class="n">r_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
@@ -196,6 +205,9 @@
     <span class="c1">#Extract data for plotting</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">var_name</span><span class="p">)</span>
+
+
+
     <span class="c1"># calculate R^2</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">r_scale</span><span class="p">):</span>
         <span class="n">r2_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">r_coords</span><span class="p">,</span> <span class="n">r_coords</span><span class="p">)</span>
@@ -208,6 +220,16 @@
     <span class="n">phi_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p_coords</span> <span class="o">-</span> <span class="n">phi_cut</span><span class="p">))</span>
 
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,:,</span><span class="n">phi_index</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">zmin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">zmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">zmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">zmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+
+    <span class="c1"># convert units </span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">*</span> <span class="n">conversion_units</span>
+    <span class="n">zmin</span> <span class="o">=</span> <span class="n">zmin</span> <span class="o">*</span> <span class="n">conversion_units</span>
+    <span class="n">zmax</span> <span class="o">=</span> <span class="n">zmax</span> <span class="o">*</span> <span class="n">conversion_units</span>
 
     <span class="c1"># Transpose</span>
     <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">T</span>
@@ -224,7 +246,7 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_thetalim</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
-    <span class="n">colorbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">shrink</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">aspect</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">pad</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span>
+    <span class="n">colorbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">shrink</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">aspect</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">pad</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">ax</span></div>
 
@@ -232,7 +254,8 @@
 <div class="viewcode-block" id="plot_slice">
 <a class="viewcode-back" href="../../modules/pviz.html#pysunrunner.pviz.plot_slice">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_slice</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">var_name</span> <span class="o">=</span> <span class="s1">&#39;vx1&#39;</span><span class="p">,</span> <span class="n">r_cut</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">theta_cut</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">phi_cut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
-    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;R (AU)&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;V (km s$^{s-1}$)&#39;</span><span class="p">,</span> <span class="n">r_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;R (AU)&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;V (km s$^{s-1}$)&#39;</span><span class="p">,</span> <span class="n">r_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">conversion_units</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to plot 1-D slices</span>
 
@@ -248,9 +271,10 @@
 <span class="sd">    ylabel: y-axis label</span>
 <span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
 <span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
-<span class="sd">    ymin (scalar): Minumum y-axis value for plot</span>
+<span class="sd">    ymin (scalar): Minimum y-axis value for plot</span>
 <span class="sd">    ymax (scalar): Maximum y-axis value for plot</span>
-<span class="sd"> </span>
+<span class="sd">    conversion_units (scalar): factor to convert units.  If None, no conversion</span>
+
 <span class="sd">    **Outputs**:</span>
 <span class="sd">    ax: A plot with one or more slices</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -266,6 +290,9 @@
 
     <span class="k">if</span> <span class="n">ylabel</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;y-axis&#39;</span>
+
+    <span class="k">if</span> <span class="n">conversion_units</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">conversion_units</span> <span class="o">=</span> <span class="mf">1.0</span>
 
     <span class="c1"># the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)</span>
     <span class="n">r_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">x1</span><span class="p">)</span>
@@ -346,7 +373,12 @@
     <span class="k">if</span> <span class="n">ymin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">ymin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data_2d</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">ymax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ax</span><span class="p">(</span><span class="n">data_2d</span><span class="p">)</span>
+        <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data_2d</span><span class="p">)</span>
+
+   <span class="c1"># convert units</span>
+    <span class="n">data_2d</span> <span class="o">=</span> <span class="n">data_2d</span> <span class="o">*</span> <span class="n">conversion_units</span>
+    <span class="n">ymin</span> <span class="o">=</span> <span class="n">ymin</span> <span class="o">*</span> <span class="n">conversion_units</span>
+    <span class="n">ymax</span> <span class="o">=</span> <span class="n">ymax</span> <span class="o">*</span> <span class="n">conversion_units</span>
 
     <span class="n">n_slice</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">slice_index</span><span class="p">)</span>
     <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_slice</span><span class="p">)</span>
@@ -380,8 +412,9 @@
 
     <span class="c1">#Set ymin and ymax</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>  <span class="c1"># Change &#39;14&#39; to the desired size</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">ax</span></div>
@@ -408,9 +441,7 @@
 <span class="sd">    ylabel: y-axis label</span>
 <span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
 <span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
-<span class="sd">    ymin (scalar): Minumum y-axis value for plot</span>
-<span class="sd">    ymax (scalar): Maximum y-axis value for plot</span>
-<span class="sd"> </span>
+
 <span class="sd">    **Outputs**:</span>
 <span class="sd">    ax: A plot with one or more slices</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -512,6 +543,9 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">time</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">time</span><span class="p">))</span> <span class="c1"># limit xrange to be 0-40 hours</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([])</span> <span class="c1"># remove y-ticks labels for stack plot</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_value</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="n">y1</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="n">y2</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>  <span class="c1"># Change &#39;14&#39; to the desired size</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
     <span class="c1"># plt.legend()</span>
 
@@ -528,7 +562,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Bhargav Vaidya.</p>
+    <p>&#169; Copyright 2024, Predictive Science Inc..</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

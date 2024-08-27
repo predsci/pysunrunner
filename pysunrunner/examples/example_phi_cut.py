@@ -53,13 +53,16 @@ log_scale = False
 # Set r_scale to True to apply r^2 scaling (useful for variables like scaled radial magnetic field or density)
 r_scale = True
 
+# convert from PLUTO units to nT
+b_fac_pluto = 0.0458505
+
 # Create a figure with a single subplot using polar projection
 fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))
 
 # Plot the phi cut of the data on the polar projection
 ax = pviz.plot_phi_cut(D=D, var_name = var_name,
         phi_cut = phi_cut, ax = ax,cmap = cmap, title = title,
-        r_scale = r_scale, log_scale=log_scale, zmin = zmin, zmax = zmax)
+        r_scale = r_scale, log_scale=log_scale, zmin = zmin, zmax = zmax, conversion_units = b_fac_pluto)
 
 # Save the plot to a PNG file with a descriptive filename
 file_name = var_name + '_equi_cut_time_index=' + str(time_idx) + '.png'

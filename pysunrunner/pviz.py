@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_scale = False, log_scale = False, 
-    zmin = None, zmax = None):
+    zmin = None, zmax = None, conversion_units = None):
     """
     Function to plot the equatorial cut.
 
@@ -13,21 +13,20 @@ def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_sc
     title: plot title
     r_scale (logical): if True scaled data is plotted (x R^2)
     log_scale (logical): if True log10 of data is plotted
-    zmin (scalar): Minumum value for color scaling
+    zmin (scalar): Minimum value for color scaling
     zmax (scalar): Maximum value for color scaling
- 
+    conversion_units (scalar): factor to convert units. If None, no conversion 
     **Outputs**:
     ax: subplot with equitorial cut of data
     """
 
     if cmap is None:
         cmap = 'rainbow'
-    if zmin is None:
-        zmin = np.min(data)
-    if zmax is None:
-        zmax = np,max(data)
+ 
     if title is None:
         title = ''
+    if conversion_units is None:
+        conversion_units = 1.0
 
     # the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)
     r_coords = np.array(D.x1)
@@ -40,13 +39,22 @@ def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_sc
     # retrieve the data to be plotted
     data = getattr(D, var_name)
 
+    if zmin is None:
+        zmin = np.min(data) 
+    if zmax is None:
+        zmax = np.max(data)
+
+    # convert units 
+    data = data * conversion_units
+    zmin = zmin * conversion_units
+    zmax = zmax * conversion_units
+
     # calculate R^2
     if (r_scale):
         r2_coords = np.multiply(r_coords, r_coords)
 
     # Create a meshgrid for spherical coordinates
     phi_grid, r_grid = np.meshgrid(p_coords, r_coords)
-
 
     # Find the index where theta is closest to 0 (equatorial plane)
 
@@ -71,12 +79,12 @@ def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_sc
     ax.set_ylim(0, np.max(r_coords))
     # ax.set_yticks([]) # remove the R labels  (remove line if we want to keep it)    
     colorbar = plt.colorbar(c, ax=ax, orientation='horizontal', shrink = 0.5, aspect = 20)
-
+   #colorbar.set_label(cbar_label, fontsize=12)  # To add label for color bar
     return ax
 
 
 def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = None, 
-    r_scale = False, log_scale = False, zmin = None, zmax = None):
+    r_scale = False, log_scale = False, zmin = None, zmax = None, conversion_units = None):
     """
     Function to plot phi cut.
 
@@ -88,21 +96,22 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
     title: plot title
     r_scale (logical): if True scaled data is plotted (x R^2)
     log_scale (logical): if True log10 of data is plotted
-    zmin (scalar): Minumum value for color scaling
+    zmin (scalar): Minimum value for color scaling
     zmax (scalar): Maximum value for color scaling
- 
+    conversion_units (scalar): factor to convert units.  If None, no conversion 
+
     **Outputs**:
     ax: subplot with phi cut of data
     """
 
     if cmap is None:
         cmap = 'rainbow'
-    if zmin is None:
-        zmin = np.min(data)
-    if zmax is None:
-        zmax = np,max(data)
+
     if title is None:
         title = ''
+    if conversion_units is None:
+        conversion_units = 1.0
+
 
     # the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)
     r_coords = np.array(D.x1)
@@ -114,6 +123,9 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
     #Extract data for plotting
 
     data = getattr(D, var_name)
+
+
+
     # calculate R^2
     if (r_scale):
         r2_coords = np.multiply(r_coords, r_coords)
@@ -126,6 +138,16 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
     phi_index = np.argmin(np.abs(p_coords - phi_cut))
 
     tmp = data[:,:,phi_index]
+
+    if zmin is None:
+        zmin = np.min(tmp)
+    if zmax is None:
+        zmax = np.max(tmp)
+
+    # convert units 
+    data = tmp * conversion_units
+    zmin = zmin * conversion_units
+    zmax = zmax * conversion_units
 
     # Transpose
     tmp = tmp.T
@@ -142,12 +164,13 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
     ax.grid(False)
     ax.set_thetalim(-np.pi / 2, np.pi / 2)
     ax.set_xticks([-np.pi/2, -np.pi/4,0,np.pi/4,np.pi/2])
-    colorbar = plt.colorbar(c, ax=ax, orientation='horizontal', shrink = 0.5, aspect = 20, pad = 0.05)
+    colorbar = plt.colorbar(c, ax=ax, orientation='horizontal', shrink = 0.5, aspect = 20, pad = 0.1)
 
     return ax
 
 def plot_slice(D, ax, var_name = 'vx1', r_cut = None, theta_cut = 0.0, phi_cut = np.pi, cmap = None, title = None, 
-    xlabel = 'R (AU)', ylabel = 'V (km s$^{s-1}$)', r_scale = False, log_scale = False, ymin = None, ymax = None):
+    xlabel = 'R (AU)', ylabel = 'V (km s$^{s-1}$)', r_scale = False, log_scale = False, ymin = None, ymax = None,
+    conversion_units = None):
     """
     Function to plot 1-D slices
 
@@ -163,9 +186,10 @@ def plot_slice(D, ax, var_name = 'vx1', r_cut = None, theta_cut = 0.0, phi_cut =
     ylabel: y-axis label
     r_scale (logical): if True scaled data is plotted (x R^2)
     log_scale (logical): if True log10 of data is plotted
-    ymin (scalar): Minumum y-axis value for plot
+    ymin (scalar): Minimum y-axis value for plot
     ymax (scalar): Maximum y-axis value for plot
- 
+    conversion_units (scalar): factor to convert units.  If None, no conversion
+
     **Outputs**:
     ax: A plot with one or more slices
     """
@@ -181,6 +205,9 @@ def plot_slice(D, ax, var_name = 'vx1', r_cut = None, theta_cut = 0.0, phi_cut =
 
     if ylabel is None:
         ylabel = 'y-axis'
+
+    if conversion_units is None:
+        conversion_units = 1.0
 
     # the coordinates are D.x1 D.x2 and D.x3 (r, theta, phi)
     r_coords = np.array(D.x1)
@@ -261,7 +288,12 @@ def plot_slice(D, ax, var_name = 'vx1', r_cut = None, theta_cut = 0.0, phi_cut =
     if ymin is None:
         ymin = np.min(data_2d)
     if ymax is None:
-        ymax = np.ax(data_2d)
+        ymax = np.max(data_2d)
+
+   # convert units
+    data_2d = data_2d * conversion_units
+    ymin = ymin * conversion_units
+    ymax = ymax * conversion_units
 
     n_slice = len(slice_index)
     indices = np.linspace(0, 1, n_slice)
@@ -295,8 +327,9 @@ def plot_slice(D, ax, var_name = 'vx1', r_cut = None, theta_cut = 0.0, phi_cut =
 
     #Set ymin and ymax
     plt.ylim(ymin, ymax)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
+    plt.xlabel(xlabel, fontsize=16)
+    plt.ylabel(ylabel, fontsize=16)
+    plt.tick_params(axis='both', which='major', labelsize=16)  # Change '14' to the desired size
     plt.legend()
 
     return ax
@@ -320,9 +353,7 @@ def plot_stack(pluto_list, ax, var_name = 'vx1', r_val = 1.0, t_val = 0.0, p_val
     ylabel: y-axis label
     r_scale (logical): if True scaled data is plotted (x R^2)
     log_scale (logical): if True log10 of data is plotted
-    ymin (scalar): Minumum y-axis value for plot
-    ymax (scalar): Maximum y-axis value for plot
- 
+
     **Outputs**:
     ax: A plot with one or more slices
     """
@@ -424,6 +455,9 @@ def plot_stack(pluto_list, ax, var_name = 'vx1', r_val = 1.0, t_val = 0.0, p_val
     plt.xlim(np.min(time),np.max(time)) # limit xrange to be 0-40 hours
     plt.gca().set_yticklabels([]) # remove y-ticks labels for stack plot
     plt.vlines(x=x_value, ymin=y1, ymax=y2, colors='black', linewidth=2)
+    plt.xlabel(xlabel, fontsize=16)
+    plt.ylabel(ylabel, fontsize=16)
+    plt.tick_params(axis='both', which='major', labelsize=16)  # Change '14' to the desired size
     plt.legend(loc='center left', bbox_to_anchor=(0.8, 0.5))
     # plt.legend()
 

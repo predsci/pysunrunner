@@ -1,7 +1,7 @@
 Loading sunRunner Data
 ==================
 
-pyPLUTO.pload
+pysunrunner.pload
 
 Inputs:
 -------
@@ -17,11 +17,11 @@ Inputs:
 Outputs:
 --------
 
-pyPLUTO pload object whose keys are arrays of data values.
+pysunrunner pload object whose keys are arrays of data values.
 
 To load the fluid data the pload module has to be imported as follows
 
- * import pyPLUTO.pload as pp
+ * import pysunner.pload as pp
  * D = pp.pload(10) #loads the data.0010.dbl file
  * D = pp.pload(10,datatype=’vtk’,w_dir=’/path/to/datafiles/’) #loads the data.0010.vtk file from given directory path
  * Then to access the numpy array of any fluid quantity say the density it can be obtained using D.rho and so on.

@@ -1,8 +1,8 @@
 Additional Tools
 ================
-pyPLUTO.Tools
+pysunrunner.Tools
 
 This module can be imported as:
- * import pyPLUTO.Tools as tl
+ * import pysunrunner.Tools as tl
  * T = tl.Tools()
 

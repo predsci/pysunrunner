@@ -11,9 +11,9 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 project = 'pysunrunner'
-copyright = '2024, Bhargav Vaidya'
-author = 'Bhargav Vaidya'
-release = '4.4.2'
+copyright = '2024, Predictive Science Inc.'
+author = 'Predictive Science Inc.'
+release = '0.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
