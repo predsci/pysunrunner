@@ -1,4 +1,4 @@
-Loading Fluid Data
+Loading sunRunner Data
 ==================
 
 pyPLUTO.pload
