@@ -41,15 +41,12 @@ def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_sc
 
     ``subplot_kw = {'projection': "polar"}``\n
 
-    ``cmap = 'rainbow'``\n
-
-    
     ``title = 'Radial Velocity'``\n
 
     
     ``fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))``\n
 
-    ``axs = pviz.plot_equatorial_cut(D=D, var_name=var_name, ax=ax, cmap=cmap, title=title)``\n
+    ``axs = pviz.plot_equatorial_cut(D=D, var_name=var_name, ax=ax, title=title)``\n
     
     ``plt.show()``\n
     """
