@@ -35,14 +35,13 @@ def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_sc
 
     ``time_idx = 0``\n
 
-    
     ``D = pp.pload(time_idx, w_dir='./', datatype='dbl')``\n
 
     ``var_name = 'vx1'``\n
 
     ``subplot_kw = {'projection': "polar"}``\n
 
-    ``cmap = 'rainbow' ``\n
+    ``cmap = 'rainbow'``\n
 
     
     ``title = 'Radial Velocity'``\n
@@ -161,7 +160,7 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
 
     ``subplot_kw = {'projection': "polar"}``\n
 
-    ``cmap = 'coolwarm'``\n
+    ``cmap= 'coolwarm'``\n
 
     ``title = 'Scaled Radial Magnetic Field'``\n
 
@@ -174,9 +173,9 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
     
     ``fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))``\n
 
-    ``ax = pviz.plot_phi_cut(D=D, var_name = var_name,
-        phi_cut = phi_cut, ax = ax,cmap = cmap, title = title,
-        r_scale = r_scale, log_scale=log_scale, conversion_units = b_fac_pluto)``\n
+    ``ax = pviz.plot_phi_cut(D=D, var_name = var_name, phi_cut = phi_cut, ax = ax,cmap = cmap, title = title, r_scale = r_scale, log_scale=log_scale, conversion_units = b_fac_pluto)``\n
+    ``plt.show()``\n
+
     """
 
     if cmap is None:
