@@ -1,4 +1,4 @@
-pvis Module
+pviz Module
 ============
 
 .. automodule:: pysunrunner.pviz

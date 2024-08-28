@@ -4,20 +4,55 @@ import matplotlib.pyplot as plt
 def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_scale = False, log_scale = False, 
     zmin = None, zmax = None, conversion_units = None):
     """
-    Function to plot the equatorial cut.
+    Function to plot an equatorial cut.
 
-    Parameters:
+    **Inputs**:
+
+
     D: PLUTO 3D array of data values
+
     var_name: variable to plot
-    cmap: colormap name
-    title: plot title
-    r_scale (logical): if True scaled data is plotted (x R^2)
-    log_scale (logical): if True log10 of data is plotted
-    zmin (scalar): Minimum value for color scaling
-    zmax (scalar): Maximum value for color scaling
-    conversion_units (scalar): factor to convert units. If None, no conversion 
+
+    cmap: colormap name, default is rainbow
+
+    title: plot title (optional)
+
+    r_scale (logical): if True scaled data is plotted (x R^2) (default is False)
+
+    log_scale (logical): if True log10 of data is plotted (default is False)
+
+    zmin (scalar): Minimum value for color scaling (optional, if not provided set based on data)
+
+    zmax (scalar): Maximum value for color scaling (optional, if not provided set based on data)
+
+    conversion_units (scalar): factor to convert units. (optional, default is no conversion)
+
     **Outputs**:
+
     ax: subplot with equitorial cut of data
+
+    **Usage**:
+
+    ``time_idx = 0``\n
+
+    
+    ``D = pp.pload(time_idx, w_dir='./', datatype='dbl')``\n
+
+    ``var_name = 'vx1'``\n
+
+    ``subplot_kw = {'projection': "polar"}``\n
+
+    ``cmap = 'rainbow' ``\n
+
+    
+    ``title = 'Radial Velocity'``\n
+
+    
+    ``fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))``\n
+
+    ``axs = pviz.plot_equatorial_cut(D=D, var_name=var_name, ax=ax, cmap=cmap, title=title)``\n
+    
+    ``plt.show()``\n
     """
 
     if cmap is None:
@@ -86,22 +121,62 @@ def plot_equatorial_cut(D, ax, var_name = 'vx1', cmap = None, title = None, r_sc
 def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = None, 
     r_scale = False, log_scale = False, zmin = None, zmax = None, conversion_units = None):
     """
-    Function to plot phi cut.
+    Function to plot a Meridonial cut.
 
-    Parameters:
+    **Inputs**:
+
     D: PLUTO 3D array of data values.
+
     var_name: variable to plot
+
     phi_cut: angle in radians for phi_cut, default is meridonial
-    cmap: colormap name
-    title: plot title
-    r_scale (logical): if True scaled data is plotted (x R^2)
-    log_scale (logical): if True log10 of data is plotted
-    zmin (scalar): Minimum value for color scaling
-    zmax (scalar): Maximum value for color scaling
-    conversion_units (scalar): factor to convert units.  If None, no conversion 
+
+    cmap: colormap name, default is rainbow
+
+    title: plot title (optional)
+
+    r_scale (logical): if True scaled data is plotted (x R^2) (default is False)
+
+    log_scale (logical): if True log10 of data is plotted (default is False)
+
+    zmin (scalar): Minimum value for color scaling (optional, if not provided set based on data)
+
+    zmax (scalar): Maximum value for color scaling (optional, if not provided set based on data)
+
+    conversion_units (scalar): factor to convert units. (optional, default is no conversion)
 
     **Outputs**:
+
     ax: subplot with phi cut of data
+
+    **Usage**:
+
+    ``time_idx = 0``\n
+
+    ``D = pp.pload(time_idx, w_dir=local_dir, datatype='dbl')``\n
+
+    ``var_name = 'Bx1'``\n
+
+    ``phi_cut = np.deg2rad(180.0)``\n
+
+    ``subplot_kw = {'projection': "polar"}``\n
+
+    ``cmap = 'coolwarm'``\n
+
+    ``title = 'Scaled Radial Magnetic Field'``\n
+
+    ``log_scale = False``\n
+
+    ``r_scale = True``\n
+
+    ``# convert from code units to nT``\n
+    ``b_fac_pluto = 0.0458505``\n
+    
+    ``fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))``\n
+
+    ``ax = pviz.plot_phi_cut(D=D, var_name = var_name,
+        phi_cut = phi_cut, ax = ax,cmap = cmap, title = title,
+        r_scale = r_scale, log_scale=log_scale, conversion_units = b_fac_pluto)``\n
     """
 
     if cmap is None:
@@ -123,8 +198,6 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
     #Extract data for plotting
 
     data = getattr(D, var_name)
-
-
 
     # calculate R^2
     if (r_scale):
@@ -174,24 +247,40 @@ def plot_slice(D, ax, var_name = 'vx1', r_cut = None, theta_cut = 0.0, phi_cut =
     """
     Function to plot 1-D slices
 
-    Parameters:
+    **Inputs**:
+
     D: PLUTO 3D array of data values.
+
     var_name: variable name for plotting
+
     r_cut: distance in AU for an r-cut, if None data plotted as a function of r
+
     theta_cut: latitude angle in radians for a theta-cut, default is equatorial, if None cuts are plotted as a function of theta
+
     phi_cut: angle in radians for phi-cut, default is meridonial, if None cuts are plotted as a function of phi
+
     cmap: colormap name
+
     title: plot title
+
     xlabel: x-axis label
+
     ylabel: y-axis label
+
     r_scale (logical): if True scaled data is plotted (x R^2)
+
     log_scale (logical): if True log10 of data is plotted
+
     ymin (scalar): Minimum y-axis value for plot
+
     ymax (scalar): Maximum y-axis value for plot
+
     conversion_units (scalar): factor to convert units.  If None, no conversion
 
     **Outputs**:
+
     ax: A plot with one or more slices
+
     """
 
     if cmap is None:
@@ -339,23 +428,39 @@ def plot_stack(pluto_list, ax, var_name = 'vx1', r_val = 1.0, t_val = 0.0, p_val
     xlabel = 'Time [hours]', ylabel = '', log_scale = False, yshift=None):
     """
     Function For a 1-D stack plot
-    Parameters:
+
+    **Inputs**:
+
     pluto_list: A list with each item a PLUTO 3D array of data values
+
     var_name: variable name for plotting
+
     r_val: distance (in AU) for cut
+
     t_val: latitude (in radians) for cut
+
     p_val: longitude (in radians) for 
+
     stack_dim: dimension for the stack plot (r, t, or p)
+
     time: time array (units are hours)
+
     cmap: colormap name
+
     title: plot title
+
     xlabel: x-axis label
+
     ylabel: y-axis label
+
     r_scale (logical): if True scaled data is plotted (x R^2)
+
     log_scale (logical): if True log10 of data is plotted
+
 
     **Outputs**:
     ax: A plot with one or more slices
+    
     """
 
 
