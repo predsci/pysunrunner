@@ -203,11 +203,6 @@
 <span class="c1"># Set title for the plot</span>
 <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Scaled Radial Magnetic Field, phi = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">phi_cut</span><span class="p">))</span>
 
-<span class="c1"># Set minimum and maximum values for the z-scale (color scale).</span>
-<span class="c1"># These are optional; if not set, the min/max values in the data will be used.</span>
-<span class="n">zmin</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span>
-<span class="n">zmax</span> <span class="o">=</span> <span class="mi">100</span>
-
 <span class="c1"># Set log_scale to True for a log10 plot of the data (useful for variables like pressure)</span>
 <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -223,7 +218,7 @@
 <span class="c1"># Plot the phi cut of the data on the polar projection</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">pviz</span><span class="o">.</span><span class="n">plot_phi_cut</span><span class="p">(</span><span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="p">,</span> <span class="n">var_name</span> <span class="o">=</span> <span class="n">var_name</span><span class="p">,</span>
     <span class="n">phi_cut</span> <span class="o">=</span> <span class="n">phi_cut</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span><span class="n">cmap</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="p">,</span>
-    <span class="n">r_scale</span> <span class="o">=</span> <span class="n">r_scale</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="n">log_scale</span><span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="n">zmax</span><span class="p">,</span> <span class="n">conversion_units</span> <span class="o">=</span> <span class="n">b_fac_pluto</span><span class="p">)</span>
+    <span class="n">r_scale</span> <span class="o">=</span> <span class="n">r_scale</span><span class="p">,</span> <span class="n">log_scale</span><span class="o">=</span><span class="n">log_scale</span><span class="p">,</span> <span class="n">conversion_units</span> <span class="o">=</span> <span class="n">b_fac_pluto</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>

@@ -127,11 +127,6 @@ Example #2: Meridonial Slice
     # Set title for the plot
     title = 'Scaled Radial Magnetic Field, phi = '+str(np.rad2deg(phi_cut))
 
-    # Set minimum and maximum values for the z-scale (color scale).
-    # These are optional; if not set, the min/max values in the data will be used.
-    zmin = -100
-    zmax = 100
-
     # Set log_scale to True for a log10 plot of the data (useful for variables like pressure)
     log_scale = False
 
@@ -147,7 +142,7 @@ Example #2: Meridonial Slice
     # Plot the phi cut of the data on the polar projection
     ax = pviz.plot_phi_cut(D=D, var_name = var_name,
         phi_cut = phi_cut, ax = ax,cmap = cmap, title = title,
-        r_scale = r_scale, log_scale=log_scale, zmin = zmin, zmax = zmax, conversion_units = b_fac_pluto)
+        r_scale = r_scale, log_scale=log_scale, conversion_units = b_fac_pluto)
 
     plt.show()
     

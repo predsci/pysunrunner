@@ -83,20 +83,51 @@
 <span class="k">def</span> <span class="nf">plot_equatorial_cut</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">var_name</span> <span class="o">=</span> <span class="s1">&#39;vx1&#39;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">r_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> 
     <span class="n">zmin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">conversion_units</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to plot the equatorial cut.</span>
+<span class="sd">    Function to plot an equatorial cut.</span>
 
-<span class="sd">    Parameters:</span>
+<span class="sd">    **Inputs**:</span>
+
+
 <span class="sd">    D: PLUTO 3D array of data values</span>
+
 <span class="sd">    var_name: variable to plot</span>
-<span class="sd">    cmap: colormap name</span>
-<span class="sd">    title: plot title</span>
-<span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
-<span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
-<span class="sd">    zmin (scalar): Minimum value for color scaling</span>
-<span class="sd">    zmax (scalar): Maximum value for color scaling</span>
-<span class="sd">    conversion_units (scalar): factor to convert units. If None, no conversion </span>
+
+<span class="sd">    cmap: colormap name, default is rainbow</span>
+
+<span class="sd">    title: plot title (optional)</span>
+
+<span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2) (default is False)</span>
+
+<span class="sd">    log_scale (logical): if True log10 of data is plotted (default is False)</span>
+
+<span class="sd">    zmin (scalar): Minimum value for color scaling (optional, if not provided set based on data)</span>
+
+<span class="sd">    zmax (scalar): Maximum value for color scaling (optional, if not provided set based on data)</span>
+
+<span class="sd">    conversion_units (scalar): factor to convert units. (optional, default is no conversion)</span>
+
 <span class="sd">    **Outputs**:</span>
+
 <span class="sd">    ax: subplot with equitorial cut of data</span>
+
+<span class="sd">    **Usage**:</span>
+
+<span class="sd">    ``time_idx = 0``\n</span>
+
+<span class="sd">    ``D = pp.pload(time_idx, w_dir=&#39;./&#39;, datatype=&#39;dbl&#39;)``\n</span>
+
+<span class="sd">    ``var_name = &#39;vx1&#39;``\n</span>
+
+<span class="sd">    ``subplot_kw = {&#39;projection&#39;: &quot;polar&quot;}``\n</span>
+
+<span class="sd">    ``title = &#39;Radial Velocity&#39;``\n</span>
+
+<span class="sd">    </span>
+<span class="sd">    ``fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))``\n</span>
+
+<span class="sd">    ``axs = pviz.plot_equatorial_cut(D=D, var_name=var_name, ax=ax, title=title)``\n</span>
+<span class="sd">    </span>
+<span class="sd">    ``plt.show()``\n</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -168,22 +199,62 @@
 <span class="k">def</span> <span class="nf">plot_phi_cut</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">var_name</span> <span class="o">=</span> <span class="s1">&#39;vx1&#39;</span><span class="p">,</span> <span class="n">phi_cut</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
     <span class="n">r_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">conversion_units</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Function to plot phi cut.</span>
+<span class="sd">    Function to plot a Meridonial cut.</span>
 
-<span class="sd">    Parameters:</span>
+<span class="sd">    **Inputs**:</span>
+
 <span class="sd">    D: PLUTO 3D array of data values.</span>
+
 <span class="sd">    var_name: variable to plot</span>
+
 <span class="sd">    phi_cut: angle in radians for phi_cut, default is meridonial</span>
-<span class="sd">    cmap: colormap name</span>
-<span class="sd">    title: plot title</span>
-<span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
-<span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
-<span class="sd">    zmin (scalar): Minimum value for color scaling</span>
-<span class="sd">    zmax (scalar): Maximum value for color scaling</span>
-<span class="sd">    conversion_units (scalar): factor to convert units.  If None, no conversion </span>
+
+<span class="sd">    cmap: colormap name, default is rainbow</span>
+
+<span class="sd">    title: plot title (optional)</span>
+
+<span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2) (default is False)</span>
+
+<span class="sd">    log_scale (logical): if True log10 of data is plotted (default is False)</span>
+
+<span class="sd">    zmin (scalar): Minimum value for color scaling (optional, if not provided set based on data)</span>
+
+<span class="sd">    zmax (scalar): Maximum value for color scaling (optional, if not provided set based on data)</span>
+
+<span class="sd">    conversion_units (scalar): factor to convert units. (optional, default is no conversion)</span>
 
 <span class="sd">    **Outputs**:</span>
+
 <span class="sd">    ax: subplot with phi cut of data</span>
+
+<span class="sd">    **Usage**:</span>
+
+<span class="sd">    ``time_idx = 0``\n</span>
+
+<span class="sd">    ``D = pp.pload(time_idx, w_dir=local_dir, datatype=&#39;dbl&#39;)``\n</span>
+
+<span class="sd">    ``var_name = &#39;Bx1&#39;``\n</span>
+
+<span class="sd">    ``phi_cut = np.deg2rad(180.0)``\n</span>
+
+<span class="sd">    ``subplot_kw = {&#39;projection&#39;: &quot;polar&quot;}``\n</span>
+
+<span class="sd">    ``cmap= &#39;coolwarm&#39;``\n</span>
+
+<span class="sd">    ``title = &#39;Scaled Radial Magnetic Field&#39;``\n</span>
+
+<span class="sd">    ``log_scale = False``\n</span>
+
+<span class="sd">    ``r_scale = True``\n</span>
+
+<span class="sd">    ``# convert from code units to nT``\n</span>
+<span class="sd">    ``b_fac_pluto = 0.0458505``\n</span>
+<span class="sd">    </span>
+<span class="sd">    ``fig, ax = plt.subplots(subplot_kw=subplot_kw, figsize=(5, 5))``\n</span>
+
+<span class="sd">    ``ax = pviz.plot_phi_cut(D=D, var_name = var_name, phi_cut = phi_cut, ax = ax,cmap = cmap, title = title, r_scale = r_scale, log_scale=log_scale, conversion_units = b_fac_pluto)``\n</span>
+<span class="sd">    ``plt.show()``\n</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -205,8 +276,6 @@
     <span class="c1">#Extract data for plotting</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">var_name</span><span class="p">)</span>
-
-
 
     <span class="c1"># calculate R^2</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">r_scale</span><span class="p">):</span>
@@ -259,24 +328,40 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to plot 1-D slices</span>
 
-<span class="sd">    Parameters:</span>
+<span class="sd">    **Inputs**:</span>
+
 <span class="sd">    D: PLUTO 3D array of data values.</span>
+
 <span class="sd">    var_name: variable name for plotting</span>
+
 <span class="sd">    r_cut: distance in AU for an r-cut, if None data plotted as a function of r</span>
+
 <span class="sd">    theta_cut: latitude angle in radians for a theta-cut, default is equatorial, if None cuts are plotted as a function of theta</span>
+
 <span class="sd">    phi_cut: angle in radians for phi-cut, default is meridonial, if None cuts are plotted as a function of phi</span>
+
 <span class="sd">    cmap: colormap name</span>
+
 <span class="sd">    title: plot title</span>
+
 <span class="sd">    xlabel: x-axis label</span>
+
 <span class="sd">    ylabel: y-axis label</span>
+
 <span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
+
 <span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
+
 <span class="sd">    ymin (scalar): Minimum y-axis value for plot</span>
+
 <span class="sd">    ymax (scalar): Maximum y-axis value for plot</span>
+
 <span class="sd">    conversion_units (scalar): factor to convert units.  If None, no conversion</span>
 
 <span class="sd">    **Outputs**:</span>
+
 <span class="sd">    ax: A plot with one or more slices</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -427,23 +512,39 @@
     <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;Time [hours]&#39;</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">log_scale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">yshift</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function For a 1-D stack plot</span>
-<span class="sd">    Parameters:</span>
+
+<span class="sd">    **Inputs**:</span>
+
 <span class="sd">    pluto_list: A list with each item a PLUTO 3D array of data values</span>
+
 <span class="sd">    var_name: variable name for plotting</span>
+
 <span class="sd">    r_val: distance (in AU) for cut</span>
+
 <span class="sd">    t_val: latitude (in radians) for cut</span>
+
 <span class="sd">    p_val: longitude (in radians) for </span>
+
 <span class="sd">    stack_dim: dimension for the stack plot (r, t, or p)</span>
+
 <span class="sd">    time: time array (units are hours)</span>
+
 <span class="sd">    cmap: colormap name</span>
+
 <span class="sd">    title: plot title</span>
+
 <span class="sd">    xlabel: x-axis label</span>
+
 <span class="sd">    ylabel: y-axis label</span>
+
 <span class="sd">    r_scale (logical): if True scaled data is plotted (x R^2)</span>
+
 <span class="sd">    log_scale (logical): if True log10 of data is plotted</span>
+
 
 <span class="sd">    **Outputs**:</span>
 <span class="sd">    ax: A plot with one or more slices</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 

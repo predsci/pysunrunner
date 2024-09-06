@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pvis Module &mdash; pysunrunner 0.1 documentation</title>
+  <title>pviz Module &mdash; pysunrunner 0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../modules.html">Modules</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pload.html">Pload Module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">pvis Module</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pviz Module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pysunrunner.pviz.plot_equatorial_cut"><code class="docutils literal notranslate"><span class="pre">plot_equatorial_cut()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pysunrunner.pviz.plot_phi_cut"><code class="docutils literal notranslate"><span class="pre">plot_phi_cut()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pysunrunner.pviz.plot_slice"><code class="docutils literal notranslate"><span class="pre">plot_slice()</span></code></a></li>
@@ -80,7 +80,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../modules.html">Modules</a></li>
-      <li class="breadcrumb-item active">pvis Module</li>
+      <li class="breadcrumb-item active">pviz Module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/modules/pviz.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -91,85 +91,109 @@
            <div itemprop="articleBody">
              
   <section id="module-pysunrunner.pviz">
-<span id="pvis-module"></span><h1>pvis Module<a class="headerlink" href="#module-pysunrunner.pviz" title="Link to this heading"></a></h1>
+<span id="pviz-module"></span><h1>pviz Module<a class="headerlink" href="#module-pysunrunner.pviz" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="pysunrunner.pviz.plot_equatorial_cut">
 <span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_equatorial_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_equatorial_cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_equatorial_cut" title="Link to this definition"></a></dt>
-<dd><p>Function to plot the equatorial cut.</p>
-<p>Parameters:
-D: PLUTO 3D array of data values
-var_name: variable to plot
-cmap: colormap name
-title: plot title
-r_scale (logical): if True scaled data is plotted (x R^2)
-log_scale (logical): if True log10 of data is plotted
-zmin (scalar): Minimum value for color scaling
-zmax (scalar): Maximum value for color scaling
-conversion_units (scalar): factor to convert units. If None, no conversion
-<strong>Outputs</strong>:
-ax: subplot with equitorial cut of data</p>
+<dd><p>Function to plot an equatorial cut.</p>
+<p><strong>Inputs</strong>:</p>
+<p>D: PLUTO 3D array of data values</p>
+<p>var_name: variable to plot</p>
+<p>cmap: colormap name, default is rainbow</p>
+<p>title: plot title (optional)</p>
+<p>r_scale (logical): if True scaled data is plotted (x R^2) (default is False)</p>
+<p>log_scale (logical): if True log10 of data is plotted (default is False)</p>
+<p>zmin (scalar): Minimum value for color scaling (optional, if not provided set based on data)</p>
+<p>zmax (scalar): Maximum value for color scaling (optional, if not provided set based on data)</p>
+<p>conversion_units (scalar): factor to convert units. (optional, default is no conversion)</p>
+<p><strong>Outputs</strong>:</p>
+<p>ax: subplot with equitorial cut of data</p>
+<p><strong>Usage</strong>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">time_idx</span> <span class="pre">=</span> <span class="pre">0</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">pp.pload(time_idx,</span> <span class="pre">w_dir='./',</span> <span class="pre">datatype='dbl')</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">var_name</span> <span class="pre">=</span> <span class="pre">'vx1'</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">subplot_kw</span> <span class="pre">=</span> <span class="pre">{'projection':</span> <span class="pre">&quot;polar&quot;}</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">title</span> <span class="pre">=</span> <span class="pre">'Radial</span> <span class="pre">Velocity'</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots(subplot_kw=subplot_kw,</span> <span class="pre">figsize=(5,</span> <span class="pre">5))</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">axs</span> <span class="pre">=</span> <span class="pre">pviz.plot_equatorial_cut(D=D,</span> <span class="pre">var_name=var_name,</span> <span class="pre">ax=ax,</span> <span class="pre">title=title)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">plt.show()</span></code></p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pysunrunner.pviz.plot_phi_cut">
 <span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_phi_cut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_phi_cut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_phi_cut" title="Link to this definition"></a></dt>
-<dd><p>Function to plot phi cut.</p>
-<p>Parameters:
-D: PLUTO 3D array of data values.
-var_name: variable to plot
-phi_cut: angle in radians for phi_cut, default is meridonial
-cmap: colormap name
-title: plot title
-r_scale (logical): if True scaled data is plotted (x R^2)
-log_scale (logical): if True log10 of data is plotted
-zmin (scalar): Minimum value for color scaling
-zmax (scalar): Maximum value for color scaling
-conversion_units (scalar): factor to convert units.  If None, no conversion</p>
-<p><strong>Outputs</strong>:
-ax: subplot with phi cut of data</p>
+<dd><p>Function to plot a Meridonial cut.</p>
+<p><strong>Inputs</strong>:</p>
+<p>D: PLUTO 3D array of data values.</p>
+<p>var_name: variable to plot</p>
+<p>phi_cut: angle in radians for phi_cut, default is meridonial</p>
+<p>cmap: colormap name, default is rainbow</p>
+<p>title: plot title (optional)</p>
+<p>r_scale (logical): if True scaled data is plotted (x R^2) (default is False)</p>
+<p>log_scale (logical): if True log10 of data is plotted (default is False)</p>
+<p>zmin (scalar): Minimum value for color scaling (optional, if not provided set based on data)</p>
+<p>zmax (scalar): Maximum value for color scaling (optional, if not provided set based on data)</p>
+<p>conversion_units (scalar): factor to convert units. (optional, default is no conversion)</p>
+<p><strong>Outputs</strong>:</p>
+<p>ax: subplot with phi cut of data</p>
+<p><strong>Usage</strong>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">time_idx</span> <span class="pre">=</span> <span class="pre">0</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">pp.pload(time_idx,</span> <span class="pre">w_dir=local_dir,</span> <span class="pre">datatype='dbl')</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">var_name</span> <span class="pre">=</span> <span class="pre">'Bx1'</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">phi_cut</span> <span class="pre">=</span> <span class="pre">np.deg2rad(180.0)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">subplot_kw</span> <span class="pre">=</span> <span class="pre">{'projection':</span> <span class="pre">&quot;polar&quot;}</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">cmap=</span> <span class="pre">'coolwarm'</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">title</span> <span class="pre">=</span> <span class="pre">'Scaled</span> <span class="pre">Radial</span> <span class="pre">Magnetic</span> <span class="pre">Field'</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">log_scale</span> <span class="pre">=</span> <span class="pre">False</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">r_scale</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">convert</span> <span class="pre">from</span> <span class="pre">code</span> <span class="pre">units</span> <span class="pre">to</span> <span class="pre">nT</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">b_fac_pluto</span> <span class="pre">=</span> <span class="pre">0.0458505</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots(subplot_kw=subplot_kw,</span> <span class="pre">figsize=(5,</span> <span class="pre">5))</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">ax</span> <span class="pre">=</span> <span class="pre">pviz.plot_phi_cut(D=D,</span> <span class="pre">var_name</span> <span class="pre">=</span> <span class="pre">var_name,</span> <span class="pre">phi_cut</span> <span class="pre">=</span> <span class="pre">phi_cut,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">ax,cmap</span> <span class="pre">=</span> <span class="pre">cmap,</span> <span class="pre">title</span> <span class="pre">=</span> <span class="pre">title,</span> <span class="pre">r_scale</span> <span class="pre">=</span> <span class="pre">r_scale,</span> <span class="pre">log_scale=log_scale,</span> <span class="pre">conversion_units</span> <span class="pre">=</span> <span class="pre">b_fac_pluto)</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">plt.show()</span></code></p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pysunrunner.pviz.plot_slice">
 <span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'R</span> <span class="pre">(AU)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'V</span> <span class="pre">(km</span> <span class="pre">s$^{s-1}$)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ymax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_slice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_slice" title="Link to this definition"></a></dt>
 <dd><p>Function to plot 1-D slices</p>
-<p>Parameters:
-D: PLUTO 3D array of data values.
-var_name: variable name for plotting
-r_cut: distance in AU for an r-cut, if None data plotted as a function of r
-theta_cut: latitude angle in radians for a theta-cut, default is equatorial, if None cuts are plotted as a function of theta
-phi_cut: angle in radians for phi-cut, default is meridonial, if None cuts are plotted as a function of phi
-cmap: colormap name
-title: plot title
-xlabel: x-axis label
-ylabel: y-axis label
-r_scale (logical): if True scaled data is plotted (x R^2)
-log_scale (logical): if True log10 of data is plotted
-ymin (scalar): Minimum y-axis value for plot
-ymax (scalar): Maximum y-axis value for plot
-conversion_units (scalar): factor to convert units.  If None, no conversion</p>
-<p><strong>Outputs</strong>:
-ax: A plot with one or more slices</p>
+<p><strong>Inputs</strong>:</p>
+<p>D: PLUTO 3D array of data values.</p>
+<p>var_name: variable name for plotting</p>
+<p>r_cut: distance in AU for an r-cut, if None data plotted as a function of r</p>
+<p>theta_cut: latitude angle in radians for a theta-cut, default is equatorial, if None cuts are plotted as a function of theta</p>
+<p>phi_cut: angle in radians for phi-cut, default is meridonial, if None cuts are plotted as a function of phi</p>
+<p>cmap: colormap name</p>
+<p>title: plot title</p>
+<p>xlabel: x-axis label</p>
+<p>ylabel: y-axis label</p>
+<p>r_scale (logical): if True scaled data is plotted (x R^2)</p>
+<p>log_scale (logical): if True log10 of data is plotted</p>
+<p>ymin (scalar): Minimum y-axis value for plot</p>
+<p>ymax (scalar): Maximum y-axis value for plot</p>
+<p>conversion_units (scalar): factor to convert units.  If None, no conversion</p>
+<p><strong>Outputs</strong>:</p>
+<p>ax: A plot with one or more slices</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pysunrunner.pviz.plot_stack">
 <span class="sig-prename descclassname"><span class="pre">pysunrunner.pviz.</span></span><span class="sig-name descname"><span class="pre">plot_stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pluto_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vx1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.141592653589793</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'p'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Time</span> <span class="pre">[hours]'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pysunrunner/pviz.html#plot_stack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pysunrunner.pviz.plot_stack" title="Link to this definition"></a></dt>
-<dd><p>Function For a 1-D stack plot
-Parameters:
-pluto_list: A list with each item a PLUTO 3D array of data values
-var_name: variable name for plotting
-r_val: distance (in AU) for cut
-t_val: latitude (in radians) for cut
-p_val: longitude (in radians) for
-stack_dim: dimension for the stack plot (r, t, or p)
-time: time array (units are hours)
-cmap: colormap name
-title: plot title
-xlabel: x-axis label
-ylabel: y-axis label
-r_scale (logical): if True scaled data is plotted (x R^2)
-log_scale (logical): if True log10 of data is plotted</p>
+<dd><p>Function For a 1-D stack plot</p>
+<p><strong>Inputs</strong>:</p>
+<p>pluto_list: A list with each item a PLUTO 3D array of data values</p>
+<p>var_name: variable name for plotting</p>
+<p>r_val: distance (in AU) for cut</p>
+<p>t_val: latitude (in radians) for cut</p>
+<p>p_val: longitude (in radians) for</p>
+<p>stack_dim: dimension for the stack plot (r, t, or p)</p>
+<p>time: time array (units are hours)</p>
+<p>cmap: colormap name</p>
+<p>title: plot title</p>
+<p>xlabel: x-axis label</p>
+<p>ylabel: y-axis label</p>
+<p>r_scale (logical): if True scaled data is plotted (x R^2)</p>
+<p>log_scale (logical): if True log10 of data is plotted</p>
 <p><strong>Outputs</strong>:
 ax: A plot with one or more slices</p>
 </dd></dl>
