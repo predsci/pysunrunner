@@ -214,7 +214,7 @@ def plot_phi_cut(D, ax, var_name = 'vx1', phi_cut = np.pi, cmap = None, title = 
         zmax = np.max(tmp)
 
     # convert units 
-    data = tmp * conversion_units
+    tmp = tmp * conversion_units
     zmin = zmin * conversion_units
     zmax = zmax * conversion_units
 
