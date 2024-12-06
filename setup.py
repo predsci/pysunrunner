@@ -8,7 +8,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'numpy==2.0.0',
-        'matplotlib==3.9.1',
+        #'matplotlib==3.9.1',
         'scipy==1.14.0',
         'pillow==10.4.0',
     ],
