@@ -9,7 +9,7 @@ setup(
     install_requires=[
         'numpy==2.0.0',
         #'matplotlib==3.9.1',
-        'scipy==1.14.0',
+        'scipy==1.9.1',
         'pillow==10.4.0',
     ],
     author="Predictive Science Inc., pyPLUTO routines by Dr. Bhargav Vaidya",
